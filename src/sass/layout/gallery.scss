@@ -1,0 +1,23 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+.poster {
+  width: 280px;
+  height: 402px;
+  @media screen and (min-width: $breakpoint-tablet) {
+    width: 336px;
+    height: 455px;
+  }
+
+  @media screen and (min-width: $breakpoint-decktop) {
+    width: 394px;
+    height: 574px;
+  }
+}
+
+.film-info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
