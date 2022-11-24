@@ -5,6 +5,7 @@
 .poster {
   width: 280px;
   height: 402px;
+
   @media screen and (min-width: $breakpoint-tablet) {
     width: 336px;
     height: 455px;
