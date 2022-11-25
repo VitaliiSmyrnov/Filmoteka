@@ -8,9 +8,7 @@ export async function renderFilmList(
   release_date,
   findGenres
 ) {
-  const genreaMarkup = await findGenres(genre_ids).then(data =>
-    data.map(name => name)
-  );
+  const genreaMarkup = await findGenres(genre_ids).then(data => data.join(", "));
   return galleryRef.insertAdjacentHTML(
     'beforeend',
     `<li class="gallery-card">
