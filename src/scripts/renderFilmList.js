@@ -1,3 +1,4 @@
+import { Loading } from 'notiflix';
 import { galleryRef } from './refs';
 
 export async function renderFilmList(
@@ -6,26 +7,40 @@ export async function renderFilmList(
   title,
   genre_ids,
   release_date,
-  findGenres
+  findGenres,
+  backdrop_path
 ) {
+  Loading.arrows();
   const genreaMarkup = await findGenres(genre_ids).then(data =>
     data.map(name => name)
   );
-  return galleryRef.insertAdjacentHTML(
+  const poster = `https://image.tmdb.org/t/p/original/${
+    poster_path || backdrop_path
+  }`;
+  galleryRef.insertAdjacentHTML(
     'beforeend',
     `<li class="gallery-card">
       <img class = "poster"
-        src="https://image.tmdb.org/t/p/original/${poster_path}"
+        src= ${
+          poster_path || backdrop_path !== undefined
+            ? poster
+            : '../images/gallery/default_img.jpg'
+        }
         alt="poster to film ${original_title}"
       />
       <div class ="gallery_info">
         <span  class ="gallery_info-title">${title.toUpperCase()}</span>
-        <span class ="gallery_info-genres">${genreaMarkup}
+        <span class ="gallery_info-genres">${
+          genreaMarkup.length === 0 ? 'Genre not specified' : genreaMarkup
+        }
         </span>
-        <span class ="gallery_info-year">${new Date(
-          release_date
-        ).getFullYear()}</span>
+        <span class ="gallery_info-year">${
+          release_date !== ''
+            ? new Date(release_date).getFullYear()
+            : 'Year not specified'
+        }</span>
       </div>
      </li>`
   );
+  Loading.remove();
 }
