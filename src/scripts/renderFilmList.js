@@ -8,11 +8,13 @@ export async function renderFilmList(
   genre_ids,
   release_date,
   findGenres,
-  backdrop_path
+  backdrop_path,
+  vote_average,
+  findGenres
 ) {
   Loading.arrows();
   const genreaMarkup = await findGenres(genre_ids).then(data =>
-    data.map(name => name)
+    data.join(', ')
   );
   const poster = `https://image.tmdb.org/t/p/original/${
     poster_path || backdrop_path
@@ -39,6 +41,7 @@ export async function renderFilmList(
             ? new Date(release_date).getFullYear()
             : 'Year not specified'
         }</span>
+        <span class="gallery_info-rating">${vote_average}</span>
       </div>
      </li>`
   );
