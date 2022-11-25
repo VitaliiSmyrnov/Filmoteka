@@ -1,6 +1,9 @@
 import { fetchGenre, fetchRandomFilm } from './fetch';
 import { renderFilmList } from './renderFilmList';
 
+import filmGenres from '../data/genres.json';
+const { genres } = filmGenres;
+
 function markupRandomFilms() {
   fetchRandomFilm().then(({ results }) =>
     results.map(
@@ -19,10 +22,15 @@ function markupRandomFilms() {
 
 markupRandomFilms();
 
-export function findGenres(filmId) {
-  return fetchGenre().then(({ genres }) =>
-    genres.filter(({ id, name }) => {
-      if (id === filmId) name;
-    })
-  );
+export function findGenres(genre_ids) {
+  return genres
+    .filter(({ id }) => genre_ids.includes(id))
+    .map(({ name }) => name || 'No genres');
 }
+
+// return fetchGenre().then(({ genres }) => {
+//   return genres
+//     .filter(({ id }) => genre_ids.includes(id))
+//     .map(({ name }) => name || 'No genres');
+// });
+// }
