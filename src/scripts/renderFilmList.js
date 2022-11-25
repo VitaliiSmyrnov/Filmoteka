@@ -1,6 +1,6 @@
 import { galleryRef } from './refs';
 
-export function renderFilmList(
+export async function renderFilmList(
   poster_path,
   original_title,
   title,
@@ -8,6 +8,9 @@ export function renderFilmList(
   release_date,
   findGenres
 ) {
+  const genreaMarkup = await findGenres(genre_ids).then(data =>
+    data.map(name => name)
+  );
   return galleryRef.insertAdjacentHTML(
     'beforeend',
     `<li class="gallery-card">
@@ -16,10 +19,8 @@ export function renderFilmList(
         alt="poster to film ${original_title}"
       />
       <div class ="gallery_info">
-        <span  class ="gallery_info-title">${title.toUpperCase()}</span>
-        <span class ="gallery_info-genres">${findGenres(genre_ids).map(
-          name => name
-        )}
+        <span  class ="gallery_info-title">${title}</span>
+        <span class ="gallery_info-genres">${genreaMarkup}
         </span>
         <span class ="gallery_info-year">${new Date(
           release_date

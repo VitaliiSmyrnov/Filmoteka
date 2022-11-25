@@ -1,9 +1,6 @@
 import { fetchGenre, fetchRandomFilm } from './fetch';
 import { renderFilmList } from './renderFilmList';
 
-import filmGenres from '../data/genres.json';
-const { genres } = filmGenres;
-
 function markupRandomFilms() {
   fetchRandomFilm().then(({ results }) =>
     results.map(
@@ -22,10 +19,19 @@ function markupRandomFilms() {
 
 markupRandomFilms();
 
-export function findGenres(genre_ids) {
-  return genres
-    .filter(({ id }) => genre_ids.includes(id))
-    .map(({ name }) => name || 'No genres');
+export async function findGenres(genre_ids) {
+  if (!localStorage.getItem('genres')) {
+    await fetchGenre();
+  }
+  try {
+    const genresObj = JSON.parse(localStorage.getItem('genres'));
+    const { genres } = genresObj;
+    return genres
+      .filter(({ id }) => genre_ids.includes(id))
+      .map(({ name }) => name || 'No genres');
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // return fetchGenre().then(({ genres }) => {
