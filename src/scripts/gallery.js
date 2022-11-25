@@ -1,10 +1,19 @@
 import { fetchGenre, fetchRandomFilm } from './fetch';
 import { renderFilmList } from './renderFilmList';
 
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+
 function markupRandomFilms() {
   fetchRandomFilm().then(({ results }) =>
     results.map(
-      ({ poster_path, original_title, title, genre_ids, release_date, vote_average }) =>
+      ({
+        poster_path,
+        original_title,
+        title,
+        genre_ids,
+        release_date,
+        vote_average,
+      }) =>
         renderFilmList(
           poster_path,
           original_title,
@@ -37,16 +46,4 @@ export async function findGenres(genre_ids) {
 
 //============= Кнопка Watched ====================================
 
-
-
-
-
 //============= Кнопка  queue ====================================
-
-
-// return fetchGenre().then(({ genres }) => {
-//   return genres
-//     .filter(({ id }) => genre_ids.includes(id))
-//     .map(({ name }) => name || 'No genres');
-// });
-// }
