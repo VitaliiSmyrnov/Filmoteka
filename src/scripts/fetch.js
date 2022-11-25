@@ -25,7 +25,7 @@ async function fetchGenre() {
     const response = await axios.get(
       `${BASE_URL}/${genre_point}?api_key=${API_KEY}`
     );
-    return response.data;
+    localStorage.setItem('genres', JSON.stringify(response.data));
   } catch (error) {
     console.log(error);
   }
