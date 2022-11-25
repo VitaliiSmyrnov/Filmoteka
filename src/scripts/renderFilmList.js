@@ -6,6 +6,7 @@ export async function renderFilmList(
   title,
   genre_ids,
   release_date,
+  vote_average,
   findGenres
 ) {
   const genreaMarkup = await findGenres(genre_ids).then(data => data.join(", "));
@@ -23,6 +24,7 @@ export async function renderFilmList(
         <span class ="gallery_info-year">${new Date(
           release_date
         ).getFullYear()}</span>
+        <span class="gallery_info-rating">${vote_average}</span>
       </div>
      </li>`
   );
