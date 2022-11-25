@@ -1,0 +1,16 @@
+.header {
+  background-image: url('../images/header/bcg-header.jpg');
+  background-repeat: no-repeat;
+  min-width: 320px;
+  min-height: 230px;
+  padding: 40px 20px 92px;
+}
+
+.searchInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $white-color;
+  width: 280px;
+  color: $white-color;
+  outline: none;
+}

@@ -1,0 +1,15 @@
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 24px;
+    right: 0;
+    top: 180px;
+}
+
+.theme-switch__icon {
+    color: currentColor;
+    height: 15px;
+    width: 15px;
+    margin-right: 8px;
+    margin-left: 8px;
+}
