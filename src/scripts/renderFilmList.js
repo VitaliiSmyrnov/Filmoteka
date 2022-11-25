@@ -16,7 +16,7 @@ export function renderFilmList(
         alt="poster to film ${original_title}"
       />
       <div class ="gallery_info">
-        <span  class ="gallery_info-title">${title}</span>
+        <span  class ="gallery_info-title">${title.toUpperCase()}</span>
         <span class ="gallery_info-genres">${findGenres(genre_ids).map(
           name => name
         )}
