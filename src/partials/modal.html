@@ -6,33 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="stop-scroll">
     <ul class="film-list">
       <li class="film-list__item" data-modal-open></li>
     </ul>
-    <div class="backdrop is-hidden" data-modal>
+    <div class="backdrop" data-modal>
       <div class="modal">
-        <button type="button" class="modal__close-btn" data-modal-close>
-          <svg class="modal__icon-close" width="11" height="11">
-            <use href="./images/icons.svg#vector"></use>
-          </svg>
-        </button>
-        <img class="film__poster" src="#" alt="Poster" />
-        <h1 class="film__title"></h1>
-        <ul class="film__properties">
-          <li class="film__vote"></li>
-          <li class="film__popularity"></li>
-          <li class="film__original"></li>
-          <li class="film__genre"></li>
-        </ul>
-        <h2 class="film__about">About</h2>
-        <p class="film__about-text"></p>
-        <button class="film__button-add-to-watch" type="button">
-          ADD TO WATCHED
-        </button>
-        <button class="film__button-add-to-queue" type="button">
-          ADD TO QUEUE
-        </button>
+        <button
+          type="button"
+          class="modal__close-btn"
+          data-modal-close
+        ></button>
+        <div class="modal__wrapper">
+          <img class="film__poster" src="#" alt="Poster" />
+          <div class="film__content-wrapper">
+            <h1 class="film__title">A FISTFUL OF LEAD</h1>
+            <ul class="film__properties-list">
+              <li class="film__properties-item">
+                <p class="film__propertie-name">Vote/Votes</p>
+                <span class="film__vote-text">7.3</span>
+                <p class="film__propertie-name--slesh">/</p>
+                <span class="film__votes-text">1260</span>
+              </li>
+              <li class="film__properties-item">
+                <p class="film__propertie-name">Popularity</p>
+                <span class="film__popularity-text">100.2</span>
+              </li>
+              <li class="film__properties-item">
+                <p class="film__propertie-name">Original Title</p>
+                <span class="film__original-text">A FISTFUL OF LEAD</span>
+              </li>
+              <li class="film__properties-item">
+                <p class="film__propertie-name">Genre</p>
+                <span class="film__genre-text">Western</span>
+              </li>
+            </ul>
+            <h2 class="film__about">ABOUT</h2>
+            <p class="film__about-text">
+              Four of the West’s most infamous outlaws assemble to steal a huge
+              stash of gold from the most corrupt settlement of the gold rush
+              towns. But not all goes to plan one is killed and the other three
+              escapes with bags of gold hide out in the abandoned gold mine
+              where they happen across another gang of three – who themselves
+              were planning to hit the very same bank! As tensions rise, things
+              go from bad to worse as they realise the bags of gold are filled
+              with lead... they’ve been double crossed – but by who and how?
+            </p>
+            <button class="film__button-add-to-watch" type="button">
+              ADD TO WATCHED
+            </button>
+            <button class="film__button-add-to-queue" type="button">
+              ADD TO QUEUE
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </body>
