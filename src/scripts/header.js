@@ -27,6 +27,7 @@ function handleSearchFormSubmit(e) {
         genre_ids,
         release_date,
         vote_average,
+        id,
       }) => {
         return renderFilmList(
           poster_path,
@@ -36,6 +37,7 @@ function handleSearchFormSubmit(e) {
           genre_ids,
           release_date,
           vote_average,
+          id,
           findGenres
         );
       }

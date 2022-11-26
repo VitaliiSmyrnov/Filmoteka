@@ -9,8 +9,8 @@ export async function renderFilmList(
   genre_ids,
   release_date,
   vote_average,
-  findGenres,
-  id
+  id,
+  findGenres
 ) {
   // Loading.arrows();
   const genreaMarkup = await findGenres(genre_ids).then(data =>
