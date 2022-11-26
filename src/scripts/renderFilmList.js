@@ -1,5 +1,5 @@
 import { Loading } from 'notiflix';
-import { galleryRef } from './refs';
+import { galleryRef, modal, openModalBtn } from './refs';
 
 export async function renderFilmList(
   poster_path,
