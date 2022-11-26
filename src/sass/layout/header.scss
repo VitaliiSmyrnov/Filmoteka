@@ -1,16 +1,95 @@
 .header {
-  background-image: url('../images/header/bcg-header.jpg');
-  background-repeat: no-repeat;
   min-width: 320px;
   min-height: 230px;
-  padding: 40px 20px 92px;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    height: 216px;
+  }
+
+  background-image: url('../images/header/header-mobile1x.jpg');
+  background-color: $black-color;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (min-device-pixel-ratio: 2),
+    screen and (min-resolution: 192dpi),
+    screen and (min-resolution: 2dppx) {
+    background-image: url('../images/header/header-mobile2x.jpg');
+  }
+
+  &__box {
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav-item {
+    font-size: 12px;
+    &:not(:last-child) {
+      margin-right: 40px;
+    }
+  }
+  &__nav-link {
+    color: $white-color;
+  }
 }
 
+.header__container {
+  padding-top: 40px;
+}
+
+.auth {
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.form {
+  border-bottom: 0.5px solid $white-color;
+  font-size: 14px;
+  position: relative;
+
+  &__input::placeholder {
+    color: $white-color;
+  }
+
+  &__search-svg {
+    background: 0 0;
+    position: absolute;
+    border: none;
+    top: 4px;
+    right: 4px;
+  }
+}
 .searchInput {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid $white-color;
-  width: 280px;
+  width: 100%;
   color: $white-color;
   outline: none;
+  padding: 4px 0px;
+}
+
+.logo__text {
+  @media screen and (max-width: ($breakpoint-tablet - 1px)) {
+    display: none;
+  }
+  @media screen and (min-width: $breakpoint-tablet) {
+    margin-left: 10px;
+  }
+}
+
+.auth__text {
+  @media screen and (max-width: ($breakpoint-tablet - 1px)) {
+    display: none;
+  }
+}
+
+.notify {
+  color: $red-color;
 }

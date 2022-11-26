@@ -86,6 +86,7 @@
 
 .gallery_info-year {
   padding-left: 5px;
+  margin-right: 8px;
   border-left: 1px solid $text-accent-color;
 
   @media screen and (min-width: $breakpoint-decktop) {
@@ -95,6 +96,22 @@
 
 .gallery_info-genres {
   padding-right: 3px;
+}
+
+.gallery_info-rating {
+  width: 36px;
+  height: 16px;
+  line-height: 1.17;
+  padding: 1px 6px;
+
+  color: $white-color;
+  background-color: $btn-accent-color;
+  border-radius: 5px;
+
+  @media screen and (min-width: $breakpoint-decktop) {
+    width: 40px;
+    height: 20px;
+  }
 }
 
 
