@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-
-=======
 // const btn1Ref = document.querySelector('[data-index="1"]');
 // const btn2Ref = document.querySelector('[data-index="2"]');
 // const btn3Ref = document.querySelector('[data-index="3"]');
@@ -114,4 +110,3 @@
 //     }
 //   }
 // }
->>>>>>> dev
