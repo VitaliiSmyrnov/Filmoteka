@@ -9,8 +9,7 @@ export async function renderFilmList(
   genre_ids,
   release_date,
   vote_average,
-  findGenres,
-  id
+  findGenres
 ) {
   // Loading.arrows();
   const genreaMarkup = await findGenres(genre_ids).then(data =>
@@ -21,7 +20,7 @@ export async function renderFilmList(
   }`;
   galleryRef.insertAdjacentHTML(
     'beforeend',
-    `<li class="gallery-card" data-modal-open data-id="${id}">
+    `<li class="gallery-card" data-modal-open data-id="">
       <img class = "poster"
         src= ${
           poster_path || backdrop_path !== undefined
@@ -45,15 +44,15 @@ export async function renderFilmList(
       </div>
      </li>`
   );
-  async function handleFilmClick(e) {
-    const target = await e.target;
-    console.log(target);
-    if (target.nodeName !== 'IMG' || target.nodeName !== 'SPAN') {
-      return;
-    }
-    const toggleModal = await modal.classList.toggle('is-hidden');
-    console.log(toggleModal);
-  }
-  galleryRef.addEventListener('click', handleFilmClick);
-  // Loading.remove();
+  // async function handleFilmClick(e) {
+  //   const target = await e.target;
+  //   console.log(target);
+  //   if (target.nodeName !== 'IMG' || target.nodeName !== 'SPAN') {
+  //     return;
+  //   }
+  //   const toggleModal = await modal.classList.toggle('is-hidden');
+  //   console.log(toggleModal);
+  // }
+  // galleryRef.addEventListener('click', handleFilmClick);
+  // // Loading.remove();
 }
