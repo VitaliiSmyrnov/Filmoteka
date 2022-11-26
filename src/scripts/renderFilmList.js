@@ -9,6 +9,7 @@ export async function renderFilmList(
   genre_ids,
   release_date,
   vote_average,
+  id,
   findGenres
 ) {
   // Loading.arrows();
