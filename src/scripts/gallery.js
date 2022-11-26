@@ -8,6 +8,7 @@ function markupRandomFilms() {
     results.map(
       ({
         poster_path,
+        backdrop_path,
         original_title,
         title,
         genre_ids,
@@ -16,6 +17,7 @@ function markupRandomFilms() {
       }) =>
         renderFilmList(
           poster_path,
+          backdrop_path,
           original_title,
           title,
           genre_ids,

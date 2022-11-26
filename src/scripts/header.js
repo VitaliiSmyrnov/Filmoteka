@@ -10,53 +10,32 @@ function handleSearchFormSubmit(e) {
   const query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
   if (!query.length) {
-    notifyRef.textContent =
-      'Search result not successful. Enter the correct movie name';
-    fetchRandomFilm().then(({ results }) => {
-      results.map(
-        ({ poster_path, original_title, title, genre_ids, release_date }) => {
-          renderFilmList(
-            poster_path,
-            original_title,
-            title,
-            genre_ids,
-            release_date,
-            findGenres
-          );
-        }
-      );
-    });
+    notFound();
     return;
   }
   notifyRef.textContent = '';
   fetchSearchFilm(query).then(({ results }) => {
     if (!results.length) {
-      notifyRef.textContent =
-        'Search result not successful. Enter the correct movie name';
-      fetchRandomFilm().then(({ results }) => {
-        results.map(
-          ({ poster_path, original_title, title, genre_ids, release_date }) => {
-            renderFilmList(
-              poster_path,
-              original_title,
-              title,
-              genre_ids,
-              release_date,
-              findGenres
-            );
-          }
-        );
-      });
-      return;
+      notFound();
     }
     results.map(
-      ({ poster_path, original_title, title, genre_ids, release_date }) => {
+      ({
+        poster_path,
+        backdrop_path,
+        original_title,
+        title,
+        genre_ids,
+        release_date,
+        vote_average,
+      }) => {
         return renderFilmList(
           poster_path,
+          backdrop_path,
           original_title,
           title,
           genre_ids,
           release_date,
+          vote_average,
           findGenres
         );
       }
@@ -64,24 +43,34 @@ function handleSearchFormSubmit(e) {
   });
 }
 
-// function notFound() {
-//   notifyRef.textContent =
-//     'Search result not successful. Enter the correct movie name';
-//   fetchRandomFilm().then(({ results }) => {
-//     results.map(
-//       ({ poster_path, original_title, title, genre_ids, release_date }) => {
-//         renderFilmList(
-//           poster_path,
-//           original_title,
-//           title,
-//           genre_ids,
-//           release_date,
-//           findGenres
-//         );
-//       }
-//     );
-//   });
-//   return;
-// }
+function notFound() {
+  notifyRef.textContent =
+    'Search result not successful. Enter the correct movie name';
+  fetchRandomFilm().then(({ results }) => {
+    results.map(
+      ({
+        poster_path,
+        backdrop_path,
+        original_title,
+        title,
+        genre_ids,
+        release_date,
+        vote_average,
+      }) => {
+        renderFilmList(
+          poster_path,
+          backdrop_path,
+          original_title,
+          title,
+          genre_ids,
+          release_date,
+          vote_average,
+          findGenres
+        );
+      }
+    );
+  });
+  return;
+}
 
 formRef.addEventListener('submit', handleSearchFormSubmit);

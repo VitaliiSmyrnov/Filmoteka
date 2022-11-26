@@ -3,16 +3,15 @@ import { galleryRef } from './refs';
 
 export async function renderFilmList(
   poster_path,
+  backdrop_path,
   original_title,
   title,
   genre_ids,
   release_date,
-  findGenres,
-  backdrop_path,
   vote_average,
   findGenres
 ) {
-  Loading.arrows();
+  // Loading.arrows();
   const genreaMarkup = await findGenres(genre_ids).then(data =>
     data.join(', ')
   );
@@ -21,7 +20,7 @@ export async function renderFilmList(
   }`;
   galleryRef.insertAdjacentHTML(
     'beforeend',
-    `<li class="gallery-card">
+    `<li class="gallery-card" data-modal-open>
       <img class = "poster"
         src= ${
           poster_path || backdrop_path !== undefined
@@ -45,5 +44,5 @@ export async function renderFilmList(
       </div>
      </li>`
   );
-  Loading.remove();
+  // Loading.remove();
 }
