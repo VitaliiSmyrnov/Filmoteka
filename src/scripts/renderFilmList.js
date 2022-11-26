@@ -21,7 +21,7 @@ export async function renderFilmList(
   }`;
   galleryRef.insertAdjacentHTML(
     'beforeend',
-    `<li class="gallery-card" data-modal-open data-id="">
+    `<li class="gallery-card" data-modal-open data-id="${id}">
       <img class = "poster"
         src= ${
           poster_path || backdrop_path !== undefined

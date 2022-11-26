@@ -11,7 +11,7 @@ const headerContainer = document.querySelector('.header__container');
 const footerModal = document.querySelector('.footer__modal');
 const openTeamModal = document.querySelector('.footer-team__name');
 const closeTeamModal = document.querySelector('#teammates');
-const backdrop = document.querySelector('.backdrop');
+const backdrop = document.querySelector('.backdrop__footer');
 
 export {
   galleryRef,

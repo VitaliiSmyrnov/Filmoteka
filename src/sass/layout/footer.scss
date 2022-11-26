@@ -23,7 +23,7 @@
   text-decoration: underline;
 }
 
-.backdrop {
+.backdrop__footer {
   position: fixed;
   overflow-y: hidden;
   left: 0;
@@ -32,7 +32,7 @@
   height: 100%;
   padding-top: 200px;
   padding-bottom: 50px;
-  background-color: rgba(32, 13, 29, 0.6);
+  background-color: #000000cf;
   opacity: 1;
   z-index: 200;
   transition: opacity $timing-function;
@@ -48,12 +48,12 @@
     padding-bottom: 30px;
   }
 
-  &.is-hidden .modal {
+  &.is-hidden .modal__footer {
     transition: transform $timing-function;
     transform: scale(0) translate(-50%, -50%);
   }
 
-  &.is-open .modal {
+  &.is-open .modal__footer {
     transform: perspective(600px) translate(0px, 0%) rotateX(0deg);
     opacity: 1;
     pointer-events: initial;
