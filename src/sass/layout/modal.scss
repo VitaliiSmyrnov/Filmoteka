@@ -80,18 +80,6 @@ body.stop-scroll {
   align-items: center;
   margin-right: 8px;
   margin-top: 8px;
-<<<<<<< HEAD
-  // color: $logo-accent-color;
-  border-radius: 50%;
-  // background: $primary-background-color;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-
-  // &:hover,
-  // &:focus {
-  //   color: $accent-color;
-  // }
-=======
   background-color: rgba(0, 0, 0, 0);
   background-image: url(/src/images/close.svg);
   background-repeat: no-repeat;
@@ -105,7 +93,6 @@ body.stop-scroll {
     background-color: $btn-accent-color;
     border-radius: 50%;
   }
->>>>>>> dev
 }
 
 .modal__wrapper {
