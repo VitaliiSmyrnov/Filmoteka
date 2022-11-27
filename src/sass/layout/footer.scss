@@ -1,0 +1,189 @@
+.footer {
+  background-color: $grey-bg-color;
+  height: 100px;
+  padding: 28px 36px 30px 48px;
+}
+
+.footer__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: $grey-color;
+}
+
+.footer__text--position {
+  margin-top: 10px;
+}
+
+.footer__modal {
+  text-decoration: underline;
+}
+
+.backdrop__footer {
+  position: fixed;
+  overflow-y: hidden;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 200px;
+  padding-bottom: 50px;
+  background-color: #000000cf;
+  opacity: 1;
+  z-index: 200;
+  transition: opacity $timing-function;
+
+  @media screen and (min-width: $breakpoint-mobile) and (max-width: 767px) {
+    overflow-y: scroll;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+
+  @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+
+  &.is-hidden .modal__footer {
+    transition: transform $timing-function;
+    transform: scale(0) translate(-50%, -50%);
+  }
+
+  &.is-open .modal__footer {
+    transform: perspective(600px) translate(0px, 0%) rotateX(0deg);
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $timing-function;
+  }
+}
+
+.team__conteiner {
+  @media screen and (min-width: $breakpoint-mobile) and (max-width: 767px) {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    justify-content: center;
+  }
+}
+
+#team.team {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
+}
+
+.team-close {
+  cursor: pointer;
+  width: 25px;
+  height: 28px;
+}
+
+.team__title {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+
+  @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+}
+
+.team__list {
+  display: flex;
+  @media screen and (min-width: $breakpoint-mobile) and (max-width: 767px) {
+    flex-wrap: wrap;
+    width: 390px;
+    height: 100%;
+    margin: 0;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 660px;
+    height: auto;
+  }
+
+  @media (min-width: $breakpoint-decktop) {
+    width: 100%;
+    height: auto;
+    flex-wrap: nowrap;
+  }
+}
+
+.team-member {
+  width: 200px;
+  height: 320px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  text-align: center;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media screen and (min-width: $breakpoint-mobile) and (max-width: 767px) {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 30px;
+  }
+
+  @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+    width: 150px;
+    height: 250px;
+    &:nth-child(3) {
+      margin-right: 0;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 270px;
+    height: 260px;
+    max-width: 100%;
+    margin-bottom: 5px;
+    @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+      width: 220px;
+      height: 195px;
+      max-width: 100%;
+    }
+  }
+}
+
+.team-member__name {
+  margin-bottom: 10px;
+  font-weight: 700;
+  @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+.team-member__position {
+  font-weight: 400;
+  font-size: 14px;
+  @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
+    font-weight: 400;
+    font-size: 12px;
+  }
+}
+
+.icon-close {
+  fill: #fff;
+}
