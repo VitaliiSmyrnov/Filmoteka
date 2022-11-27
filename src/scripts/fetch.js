@@ -42,4 +42,15 @@ async function fetchSearchFilm(query) {
   }
 }
 
-export { fetchSearchFilm, fetchGenre, fetchRandomFilm };
+async function fetchMovie(id) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { fetchSearchFilm, fetchGenre, fetchRandomFilm, fetchMovie };
