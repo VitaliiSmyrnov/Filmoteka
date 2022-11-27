@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { bodyRef, toggleRef, footerDarktheme } from './theme-change';
 
 const Theme = {
@@ -31,4 +32,14 @@ function updataThemeFooter() {
   if (savedTheme === 'dark-theme') {
     footerDarktheme.classList.add('dark-theme');
   }
+=======
+export function setToLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+export function getFromLocalStorage(key) {
+  const savedData = localStorage.getItem(key);
+  const parsedData = JSON.parse(savedData);
+  return parsedData;
+>>>>>>> dev
 }

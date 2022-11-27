@@ -1,28 +1,86 @@
+body.stop-scroll {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.backdrop {
+  overflow: scroll;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+
+  transform: scale(1);
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    overflow: hidden;
+  }
+  @media screen and (min-width: $breakpoint-decktop) {
+    overflow: hidden;
+  }
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  transform: scale(3);
+  pointer-events: none;
+}
+
 .modal {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
 
-  width: 528px;
-  height: 581px;
-  background: #ffffff;
+  width: 280px;
+  height: 940px;
+  margin-top: 30px;
+
+  padding: 0 20px;
+  padding-bottom: 35px;
+  background: $white-color;
   border-radius: 4px;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    top: 50%;
+    margin: 0 auto;
+    width: 704px;
+    min-height: 420px;
+    height: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 36px;
+    padding-right: 70px;
+  }
+
+  @media screen and (min-width: $breakpoint-decktop) {
+    margin: 0 auto;
+    width: 806px;
+    height: 558px;
+    padding: 40px 12px;
+  }
 }
 
 .modal__close-btn {
   position: absolute;
   top: 0;
   right: 0;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
 
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 8px;
   margin-top: 8px;
+<<<<<<< HEAD
   // color: $logo-accent-color;
   border-radius: 50%;
   // background: $primary-background-color;
@@ -33,8 +91,206 @@
   // &:focus {
   //   color: $accent-color;
   // }
+=======
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(/src/images/close.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    // fill: $btn-accent-color;
+    background-color: $btn-accent-color;
+    border-radius: 50%;
+  }
+>>>>>>> dev
 }
 
-.modal__icon-close {
-  fill: currentColor;
+.modal__wrapper {
+  width: 100%;
+  height: 100%;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    display: flex;
+  }
+
+  @media screen and (min-width: $breakpoint-decktop) {
+  }
+}
+
+.film__poster {
+  width: 240px;
+  height: 357px;
+  margin: 0 auto;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    min-width: 264px;
+    height: 373px;
+    margin: 0 auto;
+    margin-right: 68px;
+  }
+
+  @media screen and (min-width: $breakpoint-decktop) {
+    min-width: 375px;
+    height: 478px;
+    margin-right: 16px;
+  }
+
+  //   test prop:
+
+  background-color: red;
+}
+
+.film__title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.17;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: $breakpoint-decktop) {
+    font-size: 30px;
+    line-height: 1.16;
+  }
+}
+
+.film__properties-item {
+  display: flex;
+  line-height: 0.4;
+  box-sizing: content-box;
+  margin-bottom: 8px;
+}
+
+.film__properties-item:last-child {
+  margin-bottom: 20px;
+}
+
+.film__propertie-name {
+  font-size: 12px;
+  line-height: 1.33;
+  color: $text-modal-color;
+  width: 110px;
+  display: inline-block;
+  flex-shrink: 0;
+
+  &--slesh {
+    margin-left: 2px;
+    font-size: 12px;
+    line-height: 1.33;
+    color: $text-modal-color;
+    display: inline-block;
+  }
+}
+
+.film__properties-item span {
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.film__properties-item span:nth-child(n + 3) {
+  display: inline-block;
+  text-align: center;
+  width: 36px;
+  height: 16px;
+  line-height: 1.4;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+}
+.film__properties-item span:not(:last-child) {
+  display: inline-block;
+  text-align: center;
+  width: 36px;
+  height: 16px;
+  line-height: 1.4;
+  border-radius: 5px;
+  color: $white-color;
+  background-color: $btn-accent-color;
+}
+
+.film__about {
+  font-size: 12px;
+  line-height: 1.33;
+  margin-bottom: 8px;
+}
+
+.film__about-text {
+  font-size: 12px;
+  line-height: 1.66;
+  margin-bottom: 20px;
+}
+
+.film__button-add-to-watch {
+  width: 110px;
+  height: 44px;
+  //   padding: 0;
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 500;
+  color: $white-color;
+  background-color: $btn-accent-color;
+  border: 1px solid $btn-accent-color;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: top;
+  margin-right: 15px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    width: 123px;
+    line-height: 1.23;
+    padding: 0;
+  }
+  @media screen and (min-width: $breakpoint-decktop) {
+    width: 136px;
+    line-height: 1.33;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.15);
+    box-shadow: 0 0 5px 3px rgba(255, 115, 0, 0.42);
+  }
+}
+
+.film__button-add-to-queue {
+  width: 110px;
+  height: 44px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 500;
+  background-color: $white-color;
+  border-radius: 5px;
+  border: 1px solid $black-color;
+  text-align: center;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    width: 123px;
+    line-height: 1.23;
+  }
+  @media screen and (min-width: $breakpoint-decktop) {
+    width: 136px;
+    line-height: 1.33;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.15);
+    box-shadow: 0 0 5px 3px rgba(56, 182, 255, 0.582);
+  }
+}
+
+// // Тест список
+
+.film-list__item {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(67, 15, 223);
 }

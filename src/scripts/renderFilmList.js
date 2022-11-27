@@ -1,18 +1,18 @@
 import { Loading } from 'notiflix';
-import { galleryRef } from './refs';
+import { galleryRef, modal, openModalBtn } from './refs';
 
 export async function renderFilmList(
   poster_path,
+  backdrop_path,
   original_title,
   title,
   genre_ids,
   release_date,
-  findGenres,
-  backdrop_path,
   vote_average,
+  id,
   findGenres
 ) {
-  Loading.arrows();
+  // Loading.arrows();
   const genreaMarkup = await findGenres(genre_ids).then(data =>
     data.join(', ')
   );
@@ -21,12 +21,12 @@ export async function renderFilmList(
   }`;
   galleryRef.insertAdjacentHTML(
     'beforeend',
-    `<li class="gallery-card">
+    `<li class="gallery-card" data-modal-open data-id="${id}">
       <img class = "poster"
         src= ${
           poster_path || backdrop_path !== undefined
             ? poster
-            : '../images/gallery/default_img.jpg'
+            : './images/gallery/default_img.jpg'
         }
         alt="poster to film ${original_title}"
       />
@@ -45,5 +45,15 @@ export async function renderFilmList(
       </div>
      </li>`
   );
-  Loading.remove();
+  // async function handleFilmClick(e) {
+  //   const target = await e.target;
+  //   console.log(target);
+  //   if (target.nodeName !== 'IMG' || target.nodeName !== 'SPAN') {
+  //     return;
+  //   }
+  //   const toggleModal = await modal.classList.toggle('is-hidden');
+  //   console.log(toggleModal);
+  // }
+  // galleryRef.addEventListener('click', handleFilmClick);
+  // // Loading.remove();
 }
