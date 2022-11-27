@@ -1,6 +1,9 @@
-const Theme = {
-    LIGHT: 'light-theme',
-    DARK: 'dark-theme',
-};
+export function setToLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
 
-const saveTheme = localStorage.getItem('theme');
+export function getFromLocalStorage(key) {
+  const savedData = localStorage.getItem(key);
+  const parsedData = JSON.parse(savedData);
+  return parsedData;
+}
