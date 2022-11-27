@@ -27,7 +27,6 @@ export {
   closeModalBtn,
  
   modal,
-
   containerElem,
   addWatchBtn,
    goTop,
