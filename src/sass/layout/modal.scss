@@ -34,7 +34,7 @@ body.stop-scroll {
 
 .modal {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
@@ -49,9 +49,11 @@ body.stop-scroll {
   border-radius: 4px;
 
   @media screen and (min-width: $breakpoint-tablet) {
+    top: 50%;
     margin: 0 auto;
     width: 704px;
-    height: 555px;
+    min-height: 420px;
+    height: auto;
     padding-top: 40px;
     padding-bottom: 40px;
     padding-left: 36px;
@@ -144,6 +146,7 @@ body.stop-scroll {
 }
 
 .film__properties-item {
+  display: flex;
   line-height: 0.4;
   box-sizing: content-box;
   margin-bottom: 8px;
@@ -159,8 +162,10 @@ body.stop-scroll {
   color: $text-modal-color;
   width: 110px;
   display: inline-block;
+  flex-shrink: 0;
 
   &--slesh {
+    margin-left: 2px;
     font-size: 12px;
     line-height: 1.33;
     color: $text-modal-color;
