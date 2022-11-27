@@ -108,6 +108,7 @@ function onWatchedBtnClick() {
           genre_ids,
           release_date,
           vote_average,
+          id
         }) =>
           renderFilmList(
             poster_path,
@@ -117,6 +118,7 @@ function onWatchedBtnClick() {
             genre_ids,
             release_date,
             vote_average,
+            id,
             findGenres
           )
           );
