@@ -3,18 +3,20 @@ import { findGenres } from './gallery';
 import { formRef, galleryRef } from './refs';
 import { renderFilmList } from './renderFilmList';
 
-const notifyRef = document.querySelector('.notify');
+const notifyRef = document.querySelector('.form__search-fail');
+
+export let query = {};
 
 function handleSearchFormSubmit(e) {
   e.preventDefault();
-  const query = e.target.elements['search-input'].value.trim();
+  query.query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
-  if (!query.length) {
+  if (!query.query.length) {
     notFound();
     return;
   }
   notifyRef.textContent = '';
-  fetchSearchFilm(query).then(({ results }) => {
+  fetchSearchFilm(query.query).then(({ results }) => {
     if (!results.length) {
       notFound();
     }

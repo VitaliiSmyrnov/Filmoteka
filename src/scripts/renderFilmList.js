@@ -1,5 +1,5 @@
 import { Loading } from 'notiflix';
-import { galleryRef, modal, openModalBtn } from './refs';
+import { galleryRef } from './refs';
 
 export async function renderFilmList(
   poster_path,
@@ -24,9 +24,11 @@ export async function renderFilmList(
     `<li class="gallery-card" data-modal-open data-id="${id}">
       <img class = "poster"
         src= ${
-          poster_path || backdrop_path !== undefined
+          poster_path ||
+          (backdrop_path !== undefined && poster_path) ||
+          backdrop_path !== null
             ? poster
-            : './images/gallery/default_img.jpg'
+            : '../../src/images/gallery/default_img.jpg'
         }
         alt="poster to film ${original_title}"
       />
@@ -45,15 +47,4 @@ export async function renderFilmList(
       </div>
      </li>`
   );
-  // async function handleFilmClick(e) {
-  //   const target = await e.target;
-  //   console.log(target);
-  //   if (target.nodeName !== 'IMG' || target.nodeName !== 'SPAN') {
-  //     return;
-  //   }
-  //   const toggleModal = await modal.classList.toggle('is-hidden');
-  //   console.log(toggleModal);
-  // }
-  // galleryRef.addEventListener('click', handleFilmClick);
-  // // Loading.remove();
 }
