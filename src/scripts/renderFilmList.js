@@ -24,9 +24,11 @@ export async function renderFilmList(
     `<li class="gallery-card" data-modal-open data-id="${id}">
       <img class = "poster"
         src= ${
-          poster_path || backdrop_path !== undefined
+          poster_path ||
+          (backdrop_path !== undefined && poster_path) ||
+          backdrop_path !== null
             ? poster
-            : './images/gallery/default_img.jpg'
+            : '../../src/images/gallery/default_img.jpg'
         }
         alt="poster to film ${original_title}"
       />
