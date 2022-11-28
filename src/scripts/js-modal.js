@@ -1,34 +1,72 @@
-import { galleryRef, containerElem, addWatchBtn, addQueueBtn } from './refs';
+import {
+  galleryRef,
+  containerElem,
+  closeModalBtn,
+  modal,
+  // addWatchBtn,
+} from './refs';
 import { fetchMovie } from './fetch';
 import renderModal from './renderModal';
-const refs = {
-  // openModalBtn: document.querySelector('[data-modal-open]'),
-  closeModalBtn: document.querySelector('[data-modal-close]'),
-  modal: document.querySelector('[data-modal]'),
-};
 
-// refs.openModalBtn.addEventListener('click', openModal);
-refs.closeModalBtn.addEventListener('click', closeModal);
+let searchId;
+
+closeModalBtn.addEventListener('click', closeModal);
 
 function openModal() {
-  refs.modal.classList.remove('is-hidden');
+  modal.classList.remove('is-hidden');
   document.body.classList.add('stop-scroll');
   window.addEventListener('click', handleClickOnBackdrop);
   window.addEventListener('keydown', handleKeyPress);
 
-  console.log(addWatchBtn);
+  const addWatchBtn = document.querySelector('.film__button-add-to-watch');
+  const addQueueBtn = document.querySelector('.film__button-add-to-queue');
+
+  // console.log(addWatchBtn);
+  // setTimeout(() => console.log(addWatchBtn), 3000);
+
   addWatchBtn.addEventListener('click', handleWatchClick);
   addQueueBtn.addEventListener('click', handleQueueClick);
+
+  const idArrayWatch = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_WATCH_KEY)
+  );
+  const isAddToWatch = idArrayWatch
+    ? idArrayWatch.find(value => value === searchId)
+    : false;
+
+  if (isAddToWatch) {
+    addWatchBtn.setAttribute('disabled', true);
+    addWatchBtn.classList.add('film__button--already-in-list');
+    addWatchBtn.textContent = 'ALREADY IN WATCH LIST';
+  }
+  const idArrayQueue = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_QUEUE_KEY)
+  );
+  const isAddToQueue = idArrayQueue
+    ? idArrayQueue.find(value => value === searchId)
+    : false;
+
+  if (isAddToQueue) {
+    addQueueBtn.setAttribute('disabled', true);
+    addQueueBtn.classList.add('film__button--already-in-list');
+    addQueueBtn.textContent = 'ALREADY IN QUEUE LIST';
+  }
 }
 
 function closeModal() {
-  refs.modal.classList.add('is-hidden');
+  modal.classList.add('is-hidden');
   document.body.classList.remove('stop-scroll');
-  containerElem.innerHTML = '';
 
   window.removeEventListener('click', handleClickOnBackdrop);
   window.removeEventListener('keydown', handleKeyPress);
+
+  const addWatchBtn = document.querySelector('.film__button-add-to-watch');
+  const addQueueBtn = document.querySelector('.film__button-add-to-queue');
+  // console.log(addWatchBtn);
   addWatchBtn.removeEventListener('click', handleWatchClick);
+  addQueueBtn.removeEventListener('click', handleQueueClick);
+
+  containerElem.innerHTML = '';
 }
 
 function handleKeyPress(e) {
@@ -39,14 +77,14 @@ function handleKeyPress(e) {
 }
 
 function handleClickOnBackdrop(e) {
-  if (e.target === refs.modal) {
+  if (e.target === modal) {
     closeModal();
   }
 }
 
 galleryRef.addEventListener('click', handleFilmClick);
 
-function handleFilmClick(e) {
+async function handleFilmClick(e) {
   // console.log(e);
   // console.log(e.target.nodeName);
   // console.log(e.target.closest('li').dataset.id);
@@ -56,8 +94,9 @@ function handleFilmClick(e) {
   }
   if (e.target.closest('li')) {
     const id = e.target.closest('li').dataset.id;
+    searchId = id;
+    await fetchMovie(id).then(data => renderModal(data));
     openModal();
-    fetchMovie(id).then(data => renderModal(data));
   }
 }
 
@@ -65,13 +104,37 @@ function handleFilmClick(e) {
 //    console.log('не равно');
 //    return;
 //  }
+const LOCAL_STORAGE_WATCH_KEY = 'watch';
+const LOCAL_STORAGE_QUEUE_KEY = 'queue';
 
 function handleWatchClick(e) {
-  console.log(e);
-  // const id = e.target.closest('li').dataset.id;
-  // console.log(id);
+  updateLocalStorageList(e, LOCAL_STORAGE_WATCH_KEY, 'WATCH');
 }
 
 function handleQueueClick(e) {
-  console.log(e);
+  updateLocalStorageList(e, LOCAL_STORAGE_QUEUE_KEY, 'QUEUE');
+}
+
+function updateLocalStorageList(event, key, listType) {
+  const id = searchId;
+  const loadAddedList = localStorage.getItem(key);
+  const parsedIdList = JSON.parse(loadAddedList);
+  // const findeFilmId = responseParsed
+  //   ? responseParsed.find(value => value === id)
+  //   : false;
+
+  if (!loadAddedList) {
+    const watchSetting = [id];
+    localStorage.setItem(key, JSON.stringify(watchSetting));
+    event.target.setAttribute('disabled', true);
+    event.target.classList.add('film__button--already-in-list');
+    event.target.textContent = `ALREADY IN ${listType} LIST`;
+  }
+  if (loadAddedList) {
+    parsedIdList.push(searchId);
+    localStorage.setItem(key, JSON.stringify(parsedIdList));
+    event.target.setAttribute('disabled', true);
+    event.target.classList.add('film__button--already-in-list');
+    event.target.textContent = `ALREADY IN ${listType} LIST`;
+  }
 }
