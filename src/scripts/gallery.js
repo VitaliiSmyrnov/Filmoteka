@@ -1,4 +1,4 @@
-import { fetchGenre, fetchRandomFilm } from './fetch';
+import { fetchGenre, fetchRandomFilm, fetchMovie } from './fetch';
 import { renderFilmList } from './renderFilmList';
 import {
   saveToLS,
@@ -62,7 +62,6 @@ export async function findGenres(genre_ids) {
 }
 
 //============= Кнопка add to Watched ====================================
-const LOCALSTORAGE_KEY_WATCHED = "watched";
 const arrayFilmWatched = [];
 const addWatchedBtnRef = document.querySelector('button[data-action="addWatched"]');
 
@@ -91,40 +90,44 @@ async function fetchFilmById(movie_id) {
 }
 
 //============= Кнопка Watched ====================================
+const LOCALSTORAGE_KEY_WATCHED = "watch";
 const watchedBtnRef = document.querySelector('button[data-action="watched"]');
 
 function onWatchedBtnClick() {
   
-  for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
-       const arrayFromLS = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
-       galleryRef.innerHTML = '';
-       arrayFromLS.map(
-        ({
-          poster_path,
-          backdrop_path,
-          original_title,
-          title,
-          genre_ids,
-          release_date,
-          vote_average,
-          id
-        }) =>
-          renderFilmList(
-            poster_path,
-            backdrop_path,
-            original_title,
-            title,
-            genre_ids,
-            release_date,
-            vote_average,
-            id,
-            findGenres
-          )
-          );
-      }
+  
+  if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
+    const arrayFromLSWatch = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
+    galleryRef.innerHTML = '';
+    const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
+   
+    Promise.all(filmPromisesWatch).then(results =>        
+     results.map(
+     ({
+       poster_path,
+       backdrop_path,
+       original_title,
+       title,
+       genres,
+       release_date,
+       vote_average,
+       id,
+     }) => 
+       renderFilmList(
+         poster_path,
+         backdrop_path,
+         original_title,
+         title,
+         genres,
+         release_date,
+         vote_average,
+         id,
+         findGenres
+       )
+       ));
+   }
     } 
-}
+
 
 watchedBtnRef.addEventListener('click', onWatchedBtnClick);
 
@@ -134,5 +137,44 @@ watchedBtnRef.addEventListener('click', onWatchedBtnClick);
 
 
 
-
 //============= Кнопка Queue ====================================
+const LOCALSTORAGE_KEY_QUEUE = "queue";
+const queueBtnRef = document.querySelector('button[data-action="queue"]');
+
+function onQueueBtnClick() {
+  
+    if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
+       const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
+       galleryRef.innerHTML = '';
+       const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
+      
+       Promise.all(filmPromisesQueue).then(results =>        
+        results.map(
+        ({
+          poster_path,
+          backdrop_path,
+          original_title,
+          title,
+          genres,
+          release_date,
+          vote_average,
+          id,
+        }) => 
+          renderFilmList(
+            poster_path,
+            backdrop_path,
+            original_title,
+            title,
+            genres,
+            release_date,
+            vote_average,
+            id,
+            findGenres
+          )
+          ));
+      }
+    } 
+
+
+queueBtnRef.addEventListener('click', onQueueBtnClick);
+

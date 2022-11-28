@@ -41,7 +41,7 @@ export async function renderFilmList(
             ? new Date(release_date).getFullYear()
             : 'Year not specified'
         }</span>
-        <span class="gallery_info-rating">${vote_average}</span>
+        <span class="gallery_info-rating">${vote_average.toFixed(1)}</span>
       </div>
      </li>`
   );
