@@ -7,8 +7,6 @@ import {
   genre_point,
 } from './api';
 
-let currentPage = 1;
-
 async function fetchRandomFilm(currentPage = 1) {
   try {
     const response = await axios.get(
@@ -31,7 +29,7 @@ async function fetchGenre() {
   }
 }
 
-async function fetchSearchFilm(query) {
+async function fetchSearchFilm(query, currentPage = 1) {
   try {
     const response = await axios.get(
       `${BASE_URL}/${search_point}?api_key=${API_KEY}&page=${currentPage}&query=${query}`
