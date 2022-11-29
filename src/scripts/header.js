@@ -1,18 +1,12 @@
-import { fetchRandomFilm, fetchSearchFilm } from './fetch';
-import { findGenres, render } from './gallery';
-import { formRef, galleryRef } from './refs';
-import { renderFilmList } from './renderFilmList';
+import { fetchSearchFilm } from './fetch';
+import { render } from './gallery';
+import { container, formRef, galleryRef, notifyRef } from './refs';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
-const notifyRef = document.querySelector('.form__search-fail');
-const container = document.getElementById('tui-pagination-container');
-
-export let query;
-
 export function handleSearchFormSubmit(e) {
   e.preventDefault();
-  query = e.target.elements['search-input'].value.trim();
+  let query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
   if (!query.length) {
     notFound();
@@ -25,6 +19,23 @@ export function handleSearchFormSubmit(e) {
     visiblePages: 5,
     centerAlign: true,
     page: 1,
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage:
+        '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+        '<span class="tui-ico-ellip dots">...</span>' +
+        '</a>',
+    },
   });
 
   instance_2.on('afterMove', async event => {
