@@ -13,6 +13,8 @@ export async function renderFilmList(
   findGenres
 ) {
   // Loading.arrows();
+  const hiddenClass =
+    window.location.pathname === '/index.html' ? 'visually-hidden' : '';
   const genreaMarkup = await findGenres(genre_ids).then(data =>
     data.join(', ')
   );
@@ -43,7 +45,9 @@ export async function renderFilmList(
             ? new Date(release_date).getFullYear()
             : 'Year not specified'
         }</span>
-        <span class="gallery_info-rating">${vote_average.toFixed(1)}</span>
+        <span class="gallery_info-rating ${hiddenClass}">${vote_average.toFixed(
+          1
+        )}</span>
       </div>
      </li>`
   );

@@ -51,4 +51,6 @@ async function fetchMovie(id) {
   }
 }
 
+
+
 export { fetchSearchFilm, fetchGenre, fetchRandomFilm, fetchMovie };
