@@ -69,29 +69,11 @@ function onMyLibraryLinkClick() {
 
   // galleryRef.innerHTML = '';
   onWatchedBtnClick();
-} 
+}
 
 myLibraryRef.addEventListener('click', onMyLibraryLinkClick);
 
 //============= Кнопка add to Watched ====================================
-<<<<<<< HEAD
-const LOCALSTORAGE_KEY_WATCHED = 'watched';
-const arrayFilmWatched = [];
-const addWatchedBtnRef = document.querySelector(
-  'button[data-action="addWatched"]'
-);
-
-async function onAddWatchedBtnClick() {
-  const randomId = Math.round(Math.random() * (100 - 1) + 1);
-  const value = await fetchFilmById(randomId);
-  const emptyValue = !Object.keys(value).length;
-  // const myValue = {[randomId]: value};
-  if (emptyValue) return;
-  arrayFilmWatched.push(value);
-
-  saveToLS(LOCALSTORAGE_KEY_WATCHED, arrayFilmWatched);
-}
-=======
 // const arrayFilmWatched = [];
 // const addWatchedBtnRef = document.querySelector('button[data-action="addWatched"]');
 
@@ -102,10 +84,9 @@ async function onAddWatchedBtnClick() {
 //   // const myValue = {[randomId]: value};
 //   if (emptyValue) return;
 //   arrayFilmWatched.push(value);
-  
+
 //   saveToLS(LOCALSTORAGE_KEY_WATCHED, arrayFilmWatched);
 // }
->>>>>>> 722760156f0a8161fc04fc4b856e3bb0f41e6595
 
 // addWatchedBtnRef.addEventListener('click', onAddWatchedBtnClick);
 
@@ -124,48 +105,14 @@ async function onAddWatchedBtnClick() {
 // const LOCALSTORAGE_KEY_WATCHED = "watch";
 // const watchedBtnRef = document.querySelector('button[data-action="watched"]');
 
-<<<<<<< HEAD
-function onWatchedBtnClick() {
-  for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
-      const arrayFromLS = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
-      galleryRef.innerHTML = '';
-      arrayFromLS.map(
-        ({
-          poster_path,
-          backdrop_path,
-          original_title,
-          title,
-          genre_ids,
-          release_date,
-          vote_average,
-          id,
-        }) =>
-          renderFilmList(
-            poster_path,
-            backdrop_path,
-            original_title,
-            title,
-            genre_ids,
-            release_date,
-            vote_average,
-            id,
-            findGenres
-          )
-      );
-    }
-  }
-}
-=======
 // function onWatchedBtnClick() {
-  
-  
+
 //   if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
 //     const arrayFromLSWatch = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
 //     galleryRef.innerHTML = '';
 //     const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
-   
-//     Promise.all(filmPromisesWatch).then(results =>        
+
+//     Promise.all(filmPromisesWatch).then(results =>
 //      results.map(
 //      ({
 //        poster_path,
@@ -176,7 +123,7 @@ function onWatchedBtnClick() {
 //        release_date,
 //        vote_average,
 //        id,
-//      }) => 
+//      }) =>
 //        renderFilmList(
 //          poster_path,
 //          backdrop_path,
@@ -190,33 +137,24 @@ function onWatchedBtnClick() {
 //        )
 //        ));
 //    }
-//     } 
->>>>>>> 722760156f0a8161fc04fc4b856e3bb0f41e6595
-
+//     }
 
 // watchedBtnRef.addEventListener('click', onWatchedBtnClick);
 
 //============= Кнопка add to Queue ====================================
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 722760156f0a8161fc04fc4b856e3bb0f41e6595
 //============= Кнопка Queue ====================================
 // const LOCALSTORAGE_KEY_QUEUE = "queue";
 // const queueBtnRef = document.querySelector('button[data-action="queue"]');
 
 // function onQueueBtnClick() {
-  
+
 //     if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
 //        const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
 //        galleryRef.innerHTML = '';
 //        const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
-      
-//        Promise.all(filmPromisesQueue).then(results =>        
+
+//        Promise.all(filmPromisesQueue).then(results =>
 //         results.map(
 //         ({
 //           poster_path,
@@ -227,7 +165,7 @@ function onWatchedBtnClick() {
 //           release_date,
 //           vote_average,
 //           id,
-//         }) => 
+//         }) =>
 //           renderFilmList(
 //             poster_path,
 //             backdrop_path,
@@ -241,8 +179,6 @@ function onWatchedBtnClick() {
 //           )
 //           ));
 //       }
-//     } 
-
+//     }
 
 // queueBtnRef.addEventListener('click', onQueueBtnClick);
-
