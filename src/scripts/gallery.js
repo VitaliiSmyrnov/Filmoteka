@@ -43,6 +43,7 @@ async function markupPopularFilms() {
 markupPopularFilms();
 
 export function render(results) {
+  console.log(results);
   const markup = results
     .map(
       ({

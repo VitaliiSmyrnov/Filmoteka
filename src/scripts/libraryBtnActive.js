@@ -1,8 +1,9 @@
 import { fetchMovie } from './fetch';
-import { findGenres } from './gallery';
-import { renderFilmList } from './renderFilmList';
+import { findGenres, render } from './gallery';
+import { prepareGalleryInfo, renderFilmList } from './renderFilmList';
 import { loadFromLS } from './storage.js';
 import { galleryRef } from './refs';
+
 
 const watchedBtn = document.querySelector('[data-id="watched-btn"]');
 const queueBtn = document.querySelector('[data-id="queue-btn"]');
@@ -44,7 +45,7 @@ function onWatchedBtnClick() {
           id,
         }) => {
           const genres_ids = genres.map((genre) => genre.id);
-          renderFilmList(
+          prepareGalleryInfo(
             poster_path,
             backdrop_path,
             original_title,
@@ -85,7 +86,7 @@ function onQueueBtnClick() {
           id,
         }) => {
           const genres_ids = genres.map((genre) => genre.id);
-          renderFilmList(
+          prepareGalleryInfo(
             poster_path,
             backdrop_path,
             original_title,
