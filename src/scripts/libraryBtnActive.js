@@ -9,7 +9,7 @@ const watchedBtn = document.querySelector('[data-id="watched-btn"]');
 const queueBtn = document.querySelector('[data-id="queue-btn"]');
 const watchedSet = document.querySelector('.library-buttons__wrapper');
 
-// watchedSet.addEventListener('click', makeActiveBtn);
+watchedSet.addEventListener('click', makeActiveBtn);
 
 function makeActiveBtn(e) {
   if (e.target.classList.contains('is-active')) {
@@ -32,8 +32,8 @@ function onWatchedBtnClick() {
     galleryRef.innerHTML = '';
     const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
 
-    Promise.all(filmPromisesWatch).then(results => 
-      results.map(
+    Promise.all(filmPromisesWatch).then(results => {
+      const markup = results.map(
         ({
           poster_path,
           backdrop_path,
@@ -45,7 +45,7 @@ function onWatchedBtnClick() {
           id,
         }) => {
           const genres_ids = genres.map((genre) => genre.id);
-          prepareGalleryInfo(
+          return prepareGalleryInfo(
             poster_path,
             backdrop_path,
             original_title,
@@ -57,7 +57,9 @@ function onWatchedBtnClick() {
             findGenres
           );
         }
-      )
+      ).join('');
+      galleryRef.innerHTML = markup;
+    }
     );
   }
 }
@@ -73,8 +75,8 @@ function onQueueBtnClick() {
     galleryRef.innerHTML = '';
     const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
 
-    Promise.all(filmPromisesQueue).then(results =>
-      results.map(
+    Promise.all(filmPromisesQueue).then(results => {
+      const markup = results.map(
         ({
           poster_path,
           backdrop_path,
@@ -86,7 +88,7 @@ function onQueueBtnClick() {
           id,
         }) => {
           const genres_ids = genres.map((genre) => genre.id);
-          prepareGalleryInfo(
+          return prepareGalleryInfo(
             poster_path,
             backdrop_path,
             original_title,
@@ -98,7 +100,9 @@ function onQueueBtnClick() {
             findGenres
           );
         }
-      )
+      ).join('');
+      galleryRef.innerHTML = markup;
+    }
     );
   }
 }
