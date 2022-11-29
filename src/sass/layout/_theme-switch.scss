@@ -10,9 +10,12 @@ body.light-theme {
   .modal {
     background-color: $white-color;
   }
-   .tui-pagination .tui-page-btn {
-       border: none;
-   }
+  .tui-pagination .tui-page-btn {
+    border: none;
+  }
+  .tui-pagination .tui-is-selected {
+    background-color: $btn-accent-color;
+  }
 }
 
 body.dark-theme {
@@ -35,9 +38,12 @@ body.dark-theme {
     border: none;
   }
 
-  .tui-pagination .tui-ico-ellip {
-    background-color: $white-color;
-  }
+//   .tui-pagination .tui-ico-ellip {
+//     background-color: $white-color;
+  
+//             // display: none;
+        
+//   }
 
   .tui-pagination .tui-ico-last {
     color: $white-color;
@@ -68,11 +74,7 @@ body.dark-theme {
   align-items: center;
   padding: 16px 24px;
   right: 0;
-  top: 150px;
-  @media screen and (max-width: $breakpoint-mobile) {
-    right: 0;
-    top: 0;
-  }
+  top: 0;
 }
 
 // .theme-switch__icon {
@@ -91,7 +93,7 @@ body.dark-theme {
   height: 32px;
   border-radius: 50em;
   padding: 3px 0;
-  @media screen and (max-width: $breakpoint-mobile) {
+  @media screen and (max-width: 450px) {
     width: 40px;
     height: 15px;
   }
@@ -134,7 +136,7 @@ body.dark-theme {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   transform: translateX(3px);
   transition: transform 250ms var(--timing-function);
-  @media screen and (max-width: $breakpoint-mobile) {
+  @media screen and (max-width: 450px) {
     width: 16px;
     height: 16px;
   }
