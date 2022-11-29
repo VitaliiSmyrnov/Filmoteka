@@ -1,92 +1,134 @@
-
 body.light-theme {
-    background-color: #fff;
-    color: #333333;
+  background-color: #fff;
+  color: $black-color;
+  .footer {
+    background-color: $grey-bg-color;
+  }
+  .footer__text {
+    color: $grey-color;
+  }
+  .modal {
+    background-color: $white-color;
+  }
 }
 
 body.dark-theme {
-    background-color: #181818;
+  background-color: $dark-theme-bg-color;
 
-    .gallery_info-title {
+  .gallery_info-title {
     color: $white-color;
+  }
+  .footer {
+    background-color: $dark-theme-footer-bg-color;
+  }
+  .footer__text {
+    color: $white-color;
+  }
+  .tui-pagination .tui-is-selected {
+    background-color: $btn-accent-color;
+  }
+  .tui-pagination .tui-page-btn {
+    color: $white-color;
+  }
+
+  .tui-pagination .tui-ico-ellip{
+    background-color: $white-color;
+  }
+
+  .tui-pagination .tui-ico-last {
+color: $white-color;
+  }
+
+  .modal {
+    background-color: $dark-theme-bg-color;
+  }
+
+  .film__about-text,
+  .film__about,
+  .film__title,
+  .film__original-text,
+  .film__genre-text,
+  .film__properties-text,
+  .film__popularity-text {
+    color: $white-color;
+  }
 }
-}
+
 .theme-switch {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    padding: 16px 24px;
-    right: 0;
-    top: 150px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  right: 0;
+  top: 150px;
 }
 
 .theme-switch__icon {
-    height: 40px;
-    width: 40px;
-    margin-right: 8px;
-    margin-left: 8px;
+  height: 40px;
+  width: 40px;
+  margin-right: 8px;
+  margin-left: 8px;
 }
 
 .theme-switch__control {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    position: relative;
-    width: 64px;
-    height: 32px;
-    border-radius: 50em;
-    padding: 3px 0;
-    
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 64px;
+  height: 32px;
+  border-radius: 50em;
+  padding: 3px 0;
 }
 
 .theme-switch__toggle {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    height: 0;
-    width: 0;
-    pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
 }
 
 .theme-switch__track {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    color: transparent;
-    user-select: none;
-    background-color: #333;
-    border-radius: inherit;
-    z-index: 1;
-    cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: transparent;
+  user-select: none;
+  background-color: #333;
+  border-radius: inherit;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .theme-switch__marker {
-    position: relative;
-    background-color: $btn-accent-color;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    z-index: 2;
-    pointer-events: none;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-    transform: translateX(3px);
-    transition: transform 250ms var(--timing-function);
+  position: relative;
+  background-color: $btn-accent-color;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  transform: translateX(3px);
+  transition: transform 250ms var(--timing-function);
 }
 
-.theme-switch__toggle:checked+.theme-switch__track {
-    background-color: $white-color;
+.theme-switch__toggle:checked + .theme-switch__track {
+  background-color: $white-color;
 }
 
-.theme-switch__toggle:checked~.theme-switch__marker {
-    transform: translateX(35px);
+.theme-switch__toggle:checked ~ .theme-switch__marker {
+  transform: translateX(35px);
 }
 
-.theme-switch__toggle:focus+.theme-switch__track,
-.theme-switch__toggle:active+.theme-switch__track {
-    box-shadow: 0 0 0 3px $btn-accent-color;
+.theme-switch__toggle:focus + .theme-switch__track,
+.theme-switch__toggle:active + .theme-switch__track {
+  box-shadow: 0 0 0 3px $btn-accent-color;
 }
