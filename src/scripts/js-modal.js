@@ -53,13 +53,11 @@ function openModal() {
 function closeModal() {
   modal.classList.add('is-hidden');
   document.body.classList.remove('stop-scroll');
-
   window.removeEventListener('click', handleClickOnBackdrop);
   window.removeEventListener('keydown', handleKeyPress);
 
   const addWatchBtn = document.querySelector('.film__button-add-to-watch');
   const addQueueBtn = document.querySelector('.film__button-add-to-queue');
-  // console.log(addWatchBtn);
   addWatchBtn.removeEventListener('click', handleWatchClick);
   addQueueBtn.removeEventListener('click', handleQueueClick);
 
