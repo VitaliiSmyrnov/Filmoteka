@@ -17,6 +17,7 @@
 .gallery-card {
   width: 280px;
   min-height: 440px;
+  cursor: pointer;
 
   @media screen and (min-width: $breakpoint-tablet) {
     width: 336px;
