@@ -5,6 +5,7 @@ import {
   search_point,
   discover_point,
   genre_point,
+  trailer_point,
 } from './api';
 
 let currentPage = 1;
@@ -53,4 +54,21 @@ async function fetchMovie(id) {
   }
 }
 
-export { fetchSearchFilm, fetchGenre, fetchRandomFilm, fetchMovie };
+async function fetchTrailerFilm(id) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/${trailer_point}/${id}/videos?api_key=${API_KEY}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export {
+  fetchSearchFilm,
+  fetchGenre,
+  fetchRandomFilm,
+  fetchMovie,
+  fetchTrailerFilm,
+};
