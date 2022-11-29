@@ -6,7 +6,7 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { container, galleryRef } from './refs';
 import 'tui-pagination/dist/tui-pagination.css';
 
-async function markupPopularFilms() {
+export async function markupPopularFilms() {
   if (!localStorage.getItem('genres')) {
     await fetchGenre();
   }
@@ -47,7 +47,7 @@ async function markupPopularFilms() {
   });
 }
 
-markupPopularFilms();
+// markupPopularFilms();
 
 export function render(results) {
   console.log(results);
