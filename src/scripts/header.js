@@ -9,7 +9,8 @@ export function handleSearchFormSubmit(e) {
   let query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
   if (!query.length) {
-    notFound();
+    notifyRef.textContent =
+      'Search result not successful. Enter the correct movie name and try again';
     return;
   }
 
@@ -47,15 +48,11 @@ export function handleSearchFormSubmit(e) {
   notifyRef.textContent = '';
   fetchSearchFilm(query).then(({ results }) => {
     if (!results.length) {
-      notFound();
+      notifyRef.textContent =
+        " 'Search result not successful. Enter the correct movie name and try again';";
     }
     render(results);
   });
-}
-
-function notFound() {
-  notifyRef.textContent =
-    'Search result not successful. Enter the correct movie name';
 }
 
 formRef.addEventListener('submit', handleSearchFormSubmit);
