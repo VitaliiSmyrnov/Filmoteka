@@ -1,28 +1,28 @@
 #go-top {
   position: fixed;
   z-index: 105;
-  bottom: 35px;
+  bottom: 30px;
   right: 20px;
   cursor: pointer;
   display: none;
-  width: 15px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
   background-color: transparent;
   border-radius: 50%;
 
   @media screen and (min-width: $breakpoint-tablet) {
-    width: 20px;
-    height: 20px;
-    bottom: 40px;
-    right: 30px;
+    width: 50px;
+    height: 50px;
+    bottom: 30px;
+    right: 10px;
   }
 
-  @media screen and (min-width: $breakpoint-decktop) {
-    width: 30px;
-    height: 30px;
-    bottom: 60px;
-    right: 50px;
-  }
+  // @media screen and (min-width: $breakpoint-decktop) {
+  //   width: 50px;
+  //   height: 50px;
+  //   bottom: 50px;
+  //   right: 50px;
+  // }
 
   &:hover {
     -webkit-box-shadow: 0px 0px 5px 4px orange;
@@ -33,22 +33,25 @@
   &:after {
     content: '';
     position: absolute;
-    left: 28%;
+    left: 33%;
+    bottom: 85%;
     box-sizing: border-box;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-left: 2px solid orange;
     border-bottom: 2px solid orange;
     animation: arrow 2s linear infinite;
 
     @media screen and (min-width: $breakpoint-tablet) {
+      left: 30%;
+      bottom: 60%;
       width: 20px;
       height: 20px;
     }
-    @media screen and (min-width: $breakpoint-decktop) {
-      width: 30px;
-      height: 30px;
-    }
+    // @media screen and (min-width: $breakpoint-decktop) {
+    //   width: 25px;
+    //   height: 25px;
+    // }
 
   }
 
