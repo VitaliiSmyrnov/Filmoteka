@@ -18,7 +18,11 @@ export function prepareGalleryInfo(
   findGenres
 ) {
   // Loading.arrows();
-  const genreaMarkup = findGenres(genre_ids).then(data => data.join(', '));
+  const hiddenClass =
+    window.location.pathname === '/index.html' ? 'visually-hidden' : '';
+  const genreaMarkup = findGenres(genre_ids).then(data =>
+    data.join(', ')
+  );
   const poster = `https://image.tmdb.org/t/p/original${
     poster_path || backdrop_path
   }`;
@@ -44,7 +48,9 @@ export function prepareGalleryInfo(
             ? new Date(release_date).getFullYear()
             : 'Year not specified'
         }</span>
-        <span class="gallery_info-rating">${vote_average.toFixed(1)}</span>
+        <span class="gallery_info-rating ${hiddenClass}">${vote_average.toFixed(
+          1
+        )}</span>
       </div>
      </li>`;
 }

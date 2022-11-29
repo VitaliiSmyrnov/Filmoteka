@@ -4,7 +4,7 @@
   "description": "This project was created with Parcel. For familiarization and setting additional features [refer to documentation](https://parceljs.org/).",
   "homepage": "https://Katya-Kondratchuk.github.io/filmoteka",
   "scripts": {
-    "start": "parcel src/*.html",
+    "start": "parcel src/index.html",
     "build": "parcel build src/*.html --public-url /filmoteka/"
   },
   "repository": {
