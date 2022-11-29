@@ -18,6 +18,12 @@ const backdrop = document.querySelector('.backdrop__footer');
 const clickBox = document.querySelector('#theme-switch-toggle');
 const inputChangeTheme = document.querySelector('.theme-switch__toggle');
 
+const openModalAuth = document.querySelector('[data-auth-open]');
+const closeLoginBtn = document.querySelector('[data-login-close]');
+const closeRegBtn = document.querySelector('[data-register-close]');
+const closeResultBtn = document.querySelector('[data-result-close]');
+const modalAuth = document.querySelector('[data-auth-modal]');
+
 export {
   galleryRef,
   formRef,
@@ -33,6 +39,12 @@ export {
   closeTeamModal,
   backdrop,
   addQueueBtn,
+  openModalAuth,
+  closeLoginBtn,
+  closeRegBtn,
+  closeResultBtn,
+  modalAuth,
   clickBox,
   inputChangeTheme,
+
 };

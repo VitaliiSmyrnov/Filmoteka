@@ -8,12 +8,12 @@ import {
   trailer_point,
 } from './api';
 
-async function fetchRandomFilm(currentPage = 1) {
+async function fetchPopularFilm(currentPage = 1) {
   try {
-    const response = await axios.get(
+    const { data } = await axios.get(
       `${BASE_URL}/${discover_point}?api_key=${API_KEY}&page=${currentPage}&sort_by=popularity.desc`
     );
-    return response.data;
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -21,10 +21,10 @@ async function fetchRandomFilm(currentPage = 1) {
 
 async function fetchSearchFilm(query, currentPage = 1) {
   try {
-    const response = await axios.get(
+    const { data } = await axios.get(
       `${BASE_URL}/${search_point}?api_key=${API_KEY}&page=${currentPage}&query=${query}`
     );
-    return response.data;
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -66,7 +66,7 @@ async function fetchTrailerFilm(id) {
 export {
   fetchSearchFilm,
   fetchGenre,
-  fetchRandomFilm,
+  fetchPopularFilm,
   fetchMovie,
   fetchTrailerFilm,
 };
