@@ -1,36 +1,43 @@
-import {
-  fetchGenre,
-  fetchRandomFilm,
-  fetchMovie,
-  fetchPopularFilm,
-} from './fetch';
+import { fetchGenre, fetchPopularFilm } from './fetch';
 import { prepareGalleryInfo } from './renderFilmList';
-import { saveToLS, loadFromLS } from './storage.js';
-import axios from 'axios';
-import {
-  BASE_URL,
-  API_KEY,
-  search_point,
-  discover_point,
-  genre_point,
-} from './api';
+
 import Pagination from 'tui-pagination';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import { galleryRef, formRef } from './refs';
-// import { handleSearchFormSubmit } from './header';
+import { container, galleryRef } from './refs';
 import 'tui-pagination/dist/tui-pagination.css';
-const container = document.getElementById('tui-pagination-container');
 
 async function markupPopularFilms() {
-  const { results } = await fetchPopularFilm(1);
+  if (!localStorage.getItem('genres')) {
+    await fetchGenre();
+  }
 
+  const response = await fetchPopularFilm(1);
+  const { results, total_pages } = response;
   render(results);
+
   const instance_1 = new Pagination(container, {
-    totalItems: 500,
-    itemsPerPage: 10,
+    totalItems: total_pages > 500 ? 500 : total_pages,
+    itemsPerPage: 1,
     visiblePages: 5,
     centerAlign: true,
     page: 1,
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage:
+        '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+        '<span class="tui-ico-ellip dots">...</span>' +
+        '</a>',
+    },
   });
 
   instance_1.on('afterMove', async event => {
@@ -71,10 +78,8 @@ export function render(results) {
     .join('');
   galleryRef.innerHTML = markup;
 }
-export async function findGenres(genre_ids) {
-  if (!localStorage.getItem('genres')) {
-    await fetchGenre();
-  }
+
+export function findGenres(genre_ids) {
   try {
     const genresObj = JSON.parse(localStorage.getItem('genres'));
     const { genres } = genresObj;
