@@ -1,38 +1,3 @@
-// import { setToLocalStorage, getFromLocalStorage } from "./local-storage_theme-switcher";
-
-// const clickBox = document.querySelector('#theme-switch-toggle');
-// const lightEl = document.querySelector('#theme-switch-light');
-// const bodySwitch = document.querySelector('body');
-
-
-// const theme = {
-//   LIGHT: 'light-theme',
-//   DARK: 'dark-theme',
-// };
-
-// const { LIGHT, DARK } = theme;
-
-// let newTheme = getFromLocalStorage('n-theme');
-
-// if (!newTheme) {
-//   // newTheme = LIGHT;
-//   setToLocalStorage('n-theme', LIGHT);
-// } else {
-//   bodySwitch.classList.add('darkThemeStyle');
-// }
-
-// clickBox = newTheme === LIGHT ? false : true;
-
-// lightEl.addEventListener('click', changeTheme);
-
-// function changeTheme(e) {
-//   bodySwitch.classList.toggle('darkThemeStyle');
-  
-//   setToLocalStorage('theme', bodySwitch.classList.contains(DARK) ? DARK : LIGHT);
-// }
-
-// clickBox.addEventListener('click', changeTheme);
-// const menuRef = document.querySelector(".js-menu"); //ссылка на место для вставки разметки меню
 
 import { clickBox, inputChangeTheme } from "./refs";
 const Theme = {
