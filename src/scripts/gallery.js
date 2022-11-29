@@ -1,9 +1,6 @@
 import { fetchGenre, fetchRandomFilm } from './fetch';
 import { renderFilmList } from './renderFilmList';
-import {
-  saveToLS,
-  loadFromLS
-} from './storage.js';
+import { saveToLS, loadFromLS } from './storage.js';
 import axios from 'axios';
 import {
   BASE_URL,
@@ -17,7 +14,7 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { galleryRef } from './refs';
 
 function markupRandomFilms() {
-  fetchRandomFilm().then(({ results }) => 
+  fetchRandomFilm().then(({ results }) =>
     results.map(
       ({
         poster_path,
@@ -40,7 +37,7 @@ function markupRandomFilms() {
           id,
           findGenres
         )
-        )
+    )
   );
 }
 
@@ -62,9 +59,11 @@ export async function findGenres(genre_ids) {
 }
 
 //============= Кнопка add to Watched ====================================
-const LOCALSTORAGE_KEY_WATCHED = "watched";
+const LOCALSTORAGE_KEY_WATCHED = 'watched';
 const arrayFilmWatched = [];
-const addWatchedBtnRef = document.querySelector('button[data-action="addWatched"]');
+const addWatchedBtnRef = document.querySelector(
+  'button[data-action="addWatched"]'
+);
 
 async function onAddWatchedBtnClick() {
   const randomId = Math.round(Math.random() * (100 - 1) + 1);
@@ -73,7 +72,7 @@ async function onAddWatchedBtnClick() {
   // const myValue = {[randomId]: value};
   if (emptyValue) return;
   arrayFilmWatched.push(value);
-  
+
   saveToLS(LOCALSTORAGE_KEY_WATCHED, arrayFilmWatched);
 }
 
@@ -94,12 +93,11 @@ async function fetchFilmById(movie_id) {
 const watchedBtnRef = document.querySelector('button[data-action="watched"]');
 
 function onWatchedBtnClick() {
-  
   for (let i = 0; i < localStorage.length; i++) {
     if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
-       const arrayFromLS = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
-       galleryRef.innerHTML = '';
-       arrayFromLS.map(
+      const arrayFromLS = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
+      galleryRef.innerHTML = '';
+      arrayFromLS.map(
         ({
           poster_path,
           backdrop_path,
@@ -108,7 +106,7 @@ function onWatchedBtnClick() {
           genre_ids,
           release_date,
           vote_average,
-          id
+          id,
         }) =>
           renderFilmList(
             poster_path,
@@ -121,18 +119,13 @@ function onWatchedBtnClick() {
             id,
             findGenres
           )
-          );
-      }
-    } 
+      );
+    }
+  }
 }
 
 watchedBtnRef.addEventListener('click', onWatchedBtnClick);
 
 //============= Кнопка add to Queue ====================================
-
-
-
-
-
 
 //============= Кнопка Queue ====================================

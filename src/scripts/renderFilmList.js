@@ -16,9 +16,10 @@ export async function renderFilmList(
   const genreaMarkup = await findGenres(genre_ids).then(data =>
     data.join(', ')
   );
-  const poster = `https://image.tmdb.org/t/p/original/${
+  const poster = `https://image.tmdb.org/t/p/original${
     poster_path || backdrop_path
   }`;
+  const defaultImg = './images/gallery/default_img.jpg';
   galleryRef.insertAdjacentHTML(
     'beforeend',
     `<li class="gallery-card" data-modal-open data-id="${id}">
@@ -28,7 +29,7 @@ export async function renderFilmList(
           (backdrop_path !== undefined && poster_path) ||
           backdrop_path !== null
             ? poster
-            : '../../src/images/gallery/default_img.jpg'
+            : defaultImg
         }
         alt="poster to film ${original_title}"
       />
