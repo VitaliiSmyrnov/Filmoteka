@@ -7,21 +7,22 @@ import { galleryRef } from './refs';
 import { renderFilmList } from './renderFilmList';
 
 const container = document.getElementById('tui-pagination-container');
-export const instance = new Pagination(container, {
+const instance = new Pagination(container, {
   totalItems: 500,
   itemsPerPage: 10,
   visiblePages: 5,
   centerAlign: true,
-  currentPage: 1,
+  page: 1,
 });
 
 instance.on('afterMove', event => {
-  currentPage = event.page;
+  let currentPage = event.page;
   let promise;
   if (!query.query) {
     promise = fetchRandomFilm(currentPage);
   } else {
     promise = fetchSearchFilm(query.query, currentPage);
+    // instance.movePageTo(1);
   }
   promise.then(({ results }) =>
     results.map(

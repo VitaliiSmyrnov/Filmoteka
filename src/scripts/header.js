@@ -7,7 +7,7 @@ const notifyRef = document.querySelector('.form__search-fail');
 
 export let query = {};
 
-function handleSearchFormSubmit(e) {
+export function handleSearchFormSubmit(e) {
   e.preventDefault();
   query.query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
