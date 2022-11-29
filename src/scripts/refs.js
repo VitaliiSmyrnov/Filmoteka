@@ -23,6 +23,7 @@ const closeLoginBtn = document.querySelector('[data-login-close]');
 const closeRegBtn = document.querySelector('[data-register-close]');
 const closeResultBtn = document.querySelector('[data-result-close]');
 const modalAuth = document.querySelector('[data-auth-modal]');
+const headerLibrary = document.querySelector('.library-item');
 
 export {
   galleryRef,
@@ -46,5 +47,6 @@ export {
   modalAuth,
   clickBox,
   inputChangeTheme,
+  headerLibrary
 
 };
