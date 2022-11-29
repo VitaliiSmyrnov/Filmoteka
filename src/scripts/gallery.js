@@ -12,7 +12,7 @@ import {
 
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { galleryRef, formRef } from './refs';
-import { handleSearchFormSubmit } from './header';
+// import { handleSearchFormSubmit } from './header';
 
 function markupRandomFilms() {
   fetchRandomFilm().then(({ results }) =>
@@ -61,11 +61,10 @@ export async function findGenres(genre_ids) {
 
 //=========== натискання на посилання MY LIBRARY =========================
 const myLibraryRef = document.querySelector('.library-item');
-console.log(myLibraryRef);
 
 function onMyLibraryLinkClick() {
   console.log('клік працює');
-  formRef.removeEventListener('submit', handleSearchFormSubmit);
+  // formRef.removeEventListener('submit', handleSearchFormSubmit);
 
   // galleryRef.innerHTML = '';
   onWatchedBtnClick();
