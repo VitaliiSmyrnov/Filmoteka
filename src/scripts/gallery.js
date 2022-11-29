@@ -1,4 +1,4 @@
-import { fetchGenre, fetchRandomFilm } from './fetch';
+import { fetchGenre, fetchRandomFilm, fetchMovie } from './fetch';
 import { renderFilmList } from './renderFilmList';
 import { saveToLS, loadFromLS } from './storage.js';
 import axios from 'axios';
@@ -11,7 +11,8 @@ import {
 } from './api';
 
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import { galleryRef } from './refs';
+import { galleryRef, formRef } from './refs';
+import { handleSearchFormSubmit } from './header';
 
 function markupRandomFilms() {
   fetchRandomFilm().then(({ results }) =>
@@ -58,7 +59,22 @@ export async function findGenres(genre_ids) {
   }
 }
 
+//=========== натискання на посилання MY LIBRARY =========================
+const myLibraryRef = document.querySelector('.library-item');
+console.log(myLibraryRef);
+
+function onMyLibraryLinkClick() {
+  console.log('клік працює');
+  formRef.removeEventListener('submit', handleSearchFormSubmit);
+
+  // galleryRef.innerHTML = '';
+  onWatchedBtnClick();
+} 
+
+myLibraryRef.addEventListener('click', onMyLibraryLinkClick);
+
 //============= Кнопка add to Watched ====================================
+<<<<<<< HEAD
 const LOCALSTORAGE_KEY_WATCHED = 'watched';
 const arrayFilmWatched = [];
 const addWatchedBtnRef = document.querySelector(
@@ -75,23 +91,40 @@ async function onAddWatchedBtnClick() {
 
   saveToLS(LOCALSTORAGE_KEY_WATCHED, arrayFilmWatched);
 }
+=======
+// const arrayFilmWatched = [];
+// const addWatchedBtnRef = document.querySelector('button[data-action="addWatched"]');
 
-addWatchedBtnRef.addEventListener('click', onAddWatchedBtnClick);
+// async function onAddWatchedBtnClick() {
+//   const randomId = Math.round(Math.random() * (100 - 1) + 1);
+//   const value = await fetchFilmById(randomId);
+//   const emptyValue = !Object.keys(value).length;
+//   // const myValue = {[randomId]: value};
+//   if (emptyValue) return;
+//   arrayFilmWatched.push(value);
+  
+//   saveToLS(LOCALSTORAGE_KEY_WATCHED, arrayFilmWatched);
+// }
+>>>>>>> 722760156f0a8161fc04fc4b856e3bb0f41e6595
 
-async function fetchFilmById(movie_id) {
-  try {
-    const response = await axios.get(
-      `${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
+// addWatchedBtnRef.addEventListener('click', onAddWatchedBtnClick);
+
+// async function fetchFilmById(movie_id) {
+//   try {
+//     const response = await axios.get(
+//       `${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 //============= Кнопка Watched ====================================
-const watchedBtnRef = document.querySelector('button[data-action="watched"]');
+// const LOCALSTORAGE_KEY_WATCHED = "watch";
+// const watchedBtnRef = document.querySelector('button[data-action="watched"]');
 
+<<<<<<< HEAD
 function onWatchedBtnClick() {
   for (let i = 0; i < localStorage.length; i++) {
     if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
@@ -123,9 +156,93 @@ function onWatchedBtnClick() {
     }
   }
 }
+=======
+// function onWatchedBtnClick() {
+  
+  
+//   if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
+//     const arrayFromLSWatch = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
+//     galleryRef.innerHTML = '';
+//     const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
+   
+//     Promise.all(filmPromisesWatch).then(results =>        
+//      results.map(
+//      ({
+//        poster_path,
+//        backdrop_path,
+//        original_title,
+//        title,
+//        genres,
+//        release_date,
+//        vote_average,
+//        id,
+//      }) => 
+//        renderFilmList(
+//          poster_path,
+//          backdrop_path,
+//          original_title,
+//          title,
+//          genres,
+//          release_date,
+//          vote_average,
+//          id,
+//          findGenres
+//        )
+//        ));
+//    }
+//     } 
+>>>>>>> 722760156f0a8161fc04fc4b856e3bb0f41e6595
 
-watchedBtnRef.addEventListener('click', onWatchedBtnClick);
+
+// watchedBtnRef.addEventListener('click', onWatchedBtnClick);
 
 //============= Кнопка add to Queue ====================================
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 722760156f0a8161fc04fc4b856e3bb0f41e6595
 //============= Кнопка Queue ====================================
+// const LOCALSTORAGE_KEY_QUEUE = "queue";
+// const queueBtnRef = document.querySelector('button[data-action="queue"]');
+
+// function onQueueBtnClick() {
+  
+//     if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
+//        const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
+//        galleryRef.innerHTML = '';
+//        const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
+      
+//        Promise.all(filmPromisesQueue).then(results =>        
+//         results.map(
+//         ({
+//           poster_path,
+//           backdrop_path,
+//           original_title,
+//           title,
+//           genres,
+//           release_date,
+//           vote_average,
+//           id,
+//         }) => 
+//           renderFilmList(
+//             poster_path,
+//             backdrop_path,
+//             original_title,
+//             title,
+//             genres,
+//             release_date,
+//             vote_average,
+//             id,
+//             findGenres
+//           )
+//           ));
+//       }
+//     } 
+
+
+// queueBtnRef.addEventListener('click', onQueueBtnClick);
+
