@@ -15,6 +15,8 @@ const footerModal = document.querySelector('.footer__modal');
 const openTeamModal = document.querySelector('.footer-team__name');
 const closeTeamModal = document.querySelector('#teammates');
 const backdrop = document.querySelector('.backdrop__footer');
+const clickBox = document.querySelector('#theme-switch-toggle');
+const inputChangeTheme = document.querySelector('.theme-switch__toggle');
 
 const openModalAuth = document.querySelector('[data-auth-open]');
 const closeLoginBtn = document.querySelector('[data-login-close]');
@@ -41,5 +43,8 @@ export {
   closeLoginBtn,
   closeRegBtn,
   closeResultBtn,
-  modalAuth
+  modalAuth,
+  clickBox,
+  inputChangeTheme,
+
 };

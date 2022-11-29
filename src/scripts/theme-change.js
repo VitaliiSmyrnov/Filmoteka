@@ -34,8 +34,7 @@
 // clickBox.addEventListener('click', changeTheme);
 // const menuRef = document.querySelector(".js-menu"); //ссылка на место для вставки разметки меню
 
-const clickBox = document.querySelector('#theme-switch-toggle'); //ссылка на переключатель темы
-const inputChangeTheme = document.querySelector('.theme-switch__toggle');
+import { clickBox, inputChangeTheme } from "./refs";
 const Theme = {
     LIGHT: 'light-theme',
     DARK: 'dark-theme',
