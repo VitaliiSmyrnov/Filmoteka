@@ -1,0 +1,5 @@
+.tui-pagination{
+    @media screen and (max-width: $breakpoint-tablet) {
+            min-width: 320px;
+        }
+}
