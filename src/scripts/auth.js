@@ -1,8 +1,11 @@
-import {   openModalAuth,
+import Notiflix from 'notiflix';
+
+import {
+  openModalAuth,
   closeLoginBtn,
   closeRegBtn,
   closeResultBtn,
-  modalAuth } from './refs';
+  modalAuth, headerLibrary } from './refs';
 
 import { initializeApp } from 'firebase/app';
 import {
@@ -24,6 +27,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+if (headerLibrary) {
+  headerLibrary.addEventListener('click', e => {
+    if (!auth.currentUser) {
+      e.preventDefault();
+      Notiflix.Notify.warning('Please log in or register to get access to your library');
+    }
+  });
+}
 
 openModalAuth.addEventListener('click', toggleModal);
 closeLoginBtn.addEventListener('click', toggleModal);
@@ -104,7 +116,7 @@ document.getElementById('register-btn').addEventListener('click', function () {
       document.getElementById('result-box').style.display = 'inline';
       document.getElementById('register-div').style.display = 'none';
       document.getElementById('result').innerHTML =
-        'Sorry! <br> Something is wrang.<br>' +
+        'Oops! <br> Something went wrong!<br>' +
         'Check your email or password please.';
       document.getElementById('result-box').style.textAlign = 'center';
     });
