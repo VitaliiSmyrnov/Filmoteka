@@ -5,9 +5,13 @@ import {
   modal,
   // addWatchBtn,
 } from './refs';
-import { fetchMovie } from './fetch';
+import { fetchMovie, fetchTrailerFilm } from './fetch';
 import renderModal from './renderModal';
 
+const LOCAL_STORAGE_WATCH_KEY = 'watch';
+const LOCAL_STORAGE_QUEUE_KEY = 'queue';
+const QUEUE_LIST_TYPE = 'QUEUE';
+const WATCH_LIST_TYPE = 'WATCHED';
 let searchId;
 
 closeModalBtn.addEventListener('click', closeModal);
@@ -20,49 +24,40 @@ function openModal() {
 
   const addWatchBtn = document.querySelector('.film__button-add-to-watch');
   const addQueueBtn = document.querySelector('.film__button-add-to-queue');
+  const trailerBtn = document.querySelector('.film__trailer');
 
-  // console.log(addWatchBtn);
-  // setTimeout(() => console.log(addWatchBtn), 3000);
+  const isAddToWatch = isAdded(LOCAL_STORAGE_WATCH_KEY, searchId);
+  const isAddToQueue = isAdded(LOCAL_STORAGE_QUEUE_KEY, searchId);
 
-  addWatchBtn.addEventListener('click', handleWatchClick);
-  addQueueBtn.addEventListener('click', handleQueueClick);
-
-  const idArrayWatch = JSON.parse(
-    localStorage.getItem(LOCAL_STORAGE_WATCH_KEY)
-  );
-  const isAddToWatch = idArrayWatch
-    ? idArrayWatch.find(value => value === searchId)
-    : false;
+  trailerBtn.addEventListener('click', handleBtnTrailerClick);
 
   if (isAddToWatch) {
-    addWatchBtn.setAttribute('disabled', true);
-    addWatchBtn.classList.add('film__button--already-in-list');
-    addWatchBtn.textContent = 'ALREADY IN WATCH LIST';
+    renderBtnAppearance(addWatchBtn, WATCH_LIST_TYPE, true);
+    addWatchBtn.addEventListener('click', handleRemoveWatch);
   }
-  const idArrayQueue = JSON.parse(
-    localStorage.getItem(LOCAL_STORAGE_QUEUE_KEY)
-  );
-  const isAddToQueue = idArrayQueue
-    ? idArrayQueue.find(value => value === searchId)
-    : false;
 
+  if (!isAddToWatch) {
+    renderBtnAppearance(addWatchBtn, WATCH_LIST_TYPE, false);
+    addWatchBtn.addEventListener('click', handleWatchClick);
+  }
   if (isAddToQueue) {
-    addQueueBtn.setAttribute('disabled', true);
-    addQueueBtn.classList.add('film__button--already-in-list');
-    addQueueBtn.textContent = 'ALREADY IN QUEUE LIST';
+    renderBtnAppearance(addQueueBtn, QUEUE_LIST_TYPE, true);
+    addQueueBtn.addEventListener('click', handleRemoveQueue);
+  }
+  if (!isAddToQueue) {
+    renderBtnAppearance(addQueueBtn, QUEUE_LIST_TYPE, false);
+    addQueueBtn.addEventListener('click', handleQueueClick);
   }
 }
 
 function closeModal() {
   modal.classList.add('is-hidden');
   document.body.classList.remove('stop-scroll');
-
   window.removeEventListener('click', handleClickOnBackdrop);
   window.removeEventListener('keydown', handleKeyPress);
 
   const addWatchBtn = document.querySelector('.film__button-add-to-watch');
   const addQueueBtn = document.querySelector('.film__button-add-to-queue');
-  // console.log(addWatchBtn);
   addWatchBtn.removeEventListener('click', handleWatchClick);
   addQueueBtn.removeEventListener('click', handleQueueClick);
 
@@ -104,37 +99,86 @@ async function handleFilmClick(e) {
 //    console.log('не равно');
 //    return;
 //  }
-const LOCAL_STORAGE_WATCH_KEY = 'watch';
-const LOCAL_STORAGE_QUEUE_KEY = 'queue';
 
 function handleWatchClick(e) {
-  updateLocalStorageList(e, LOCAL_STORAGE_WATCH_KEY, 'WATCH');
+  updateLocalStorageList(e, LOCAL_STORAGE_WATCH_KEY, WATCH_LIST_TYPE);
+  e.target.removeEventListener('click', handleWatchClick);
+  e.target.addEventListener('click', handleRemoveWatch);
 }
 
 function handleQueueClick(e) {
-  updateLocalStorageList(e, LOCAL_STORAGE_QUEUE_KEY, 'QUEUE');
+  updateLocalStorageList(e, LOCAL_STORAGE_QUEUE_KEY, QUEUE_LIST_TYPE);
+  e.target.removeEventListener('click', handleQueueClick);
+  e.target.addEventListener('click', handleRemoveQueue);
+}
+
+function handleRemoveWatch(e) {
+  removeFromLocalStorage(e, LOCAL_STORAGE_WATCH_KEY, WATCH_LIST_TYPE);
+  e.target.removeEventListener('click', handleRemoveWatch);
+  e.target.addEventListener('click', handleWatchClick);
+}
+
+function handleRemoveQueue(e) {
+  removeFromLocalStorage(e, LOCAL_STORAGE_QUEUE_KEY, QUEUE_LIST_TYPE);
+  e.target.removeEventListener('click', handleRemoveQueue);
+  e.target.addEventListener('click', handleQueueClick);
 }
 
 function updateLocalStorageList(event, key, listType) {
   const id = searchId;
   const loadAddedList = localStorage.getItem(key);
   const parsedIdList = JSON.parse(loadAddedList);
+  const renderBtn = event.target;
   // const findeFilmId = responseParsed
   //   ? responseParsed.find(value => value === id)
   //   : false;
 
   if (!loadAddedList) {
     const watchSetting = [id];
-    localStorage.setItem(key, JSON.stringify(watchSetting));
-    event.target.setAttribute('disabled', true);
-    event.target.classList.add('film__button--already-in-list');
-    event.target.textContent = `ALREADY IN ${listType} LIST`;
+    setToLocalStorage(watchSetting, key);
+    renderBtnAppearance(renderBtn, listType, true);
   }
   if (loadAddedList) {
     parsedIdList.push(searchId);
-    localStorage.setItem(key, JSON.stringify(parsedIdList));
-    event.target.setAttribute('disabled', true);
-    event.target.classList.add('film__button--already-in-list');
-    event.target.textContent = `ALREADY IN ${listType} LIST`;
+    setToLocalStorage(parsedIdList, key);
+    renderBtnAppearance(renderBtn, listType, true);
   }
+}
+
+function setToLocalStorage(idArray, key) {
+  localStorage.setItem(key, JSON.stringify(idArray));
+}
+
+function isAdded(key, id) {
+  const idArray = JSON.parse(localStorage.getItem(key));
+  const isAdd = idArray ? idArray.find(value => value === id) : false;
+  return isAdd;
+}
+
+function renderBtnAppearance(button, type, isActive) {
+  if (isActive) {
+    button.classList.add('film__button--already-in-list');
+    button.textContent = `REMOVE FROM ${type} LIST`;
+  } else {
+    button.classList.remove('film__button--already-in-list');
+    button.textContent = `ADD TO ${type}`;
+  }
+}
+
+function removeFromLocalStorage(event, key, listType) {
+  const findeId = searchId;
+  const renderBtn = event.target;
+  const includesId = JSON.parse(localStorage.getItem(key));
+  const updateId = includesId.filter(id => id !== findeId);
+  setToLocalStorage(updateId, key);
+  renderBtnAppearance(renderBtn, listType, false);
+}
+
+function handleBtnTrailerClick(e) {
+  const placeContainerElem = document.querySelector('.film__trailer-place');
+  const id = searchId;
+  fetchTrailerFilm(id).then(({ results }) => {
+    let key = results[0].key;
+    placeContainerElem.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  });
 }

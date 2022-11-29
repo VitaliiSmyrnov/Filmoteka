@@ -5,14 +5,15 @@ import {
   search_point,
   discover_point,
   genre_point,
+  trailer_point,
 } from './api';
 
-async function fetchRandomFilm(currentPage = 1) {
+async function fetchPopularFilm(currentPage = 1) {
   try {
-    const response = await axios.get(
+    const { data } = await axios.get(
       `${BASE_URL}/${discover_point}?api_key=${API_KEY}&page=${currentPage}&sort_by=popularity.desc`
     );
-    return response.data;
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -20,10 +21,10 @@ async function fetchRandomFilm(currentPage = 1) {
 
 async function fetchSearchFilm(query, currentPage = 1) {
   try {
-    const response = await axios.get(
+    const { data } = await axios.get(
       `${BASE_URL}/${search_point}?api_key=${API_KEY}&page=${currentPage}&query=${query}`
     );
-    return response.data;
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -51,6 +52,21 @@ async function fetchMovie(id) {
   }
 }
 
+async function fetchTrailerFilm(id) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/${trailer_point}/${id}/videos?api_key=${API_KEY}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-
-export { fetchSearchFilm, fetchGenre, fetchRandomFilm, fetchMovie };
+export {
+  fetchSearchFilm,
+  fetchGenre,
+  fetchPopularFilm,
+  fetchMovie,
+  fetchTrailerFilm,
+};

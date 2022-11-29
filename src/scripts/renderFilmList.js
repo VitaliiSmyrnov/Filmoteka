@@ -1,7 +1,12 @@
 import { Loading } from 'notiflix';
 import { galleryRef } from './refs';
 
-export async function renderFilmList(
+const noImageUrl = new URL(
+  '../images/gallery/default_img.jpg',
+  import.meta.url
+);
+
+export function prepareGalleryInfo(
   poster_path,
   backdrop_path,
   original_title,
@@ -15,22 +20,20 @@ export async function renderFilmList(
   // Loading.arrows();
   const hiddenClass =
     window.location.pathname === '/index.html' ? 'visually-hidden' : '';
-  const genreaMarkup = await findGenres(genre_ids).then(data =>
+  const genreaMarkup = findGenres(genre_ids).then(data =>
     data.join(', ')
   );
-  const poster = `https://image.tmdb.org/t/p/original/${
+  const poster = `https://image.tmdb.org/t/p/original${
     poster_path || backdrop_path
   }`;
-  galleryRef.insertAdjacentHTML(
-    'beforeend',
-    `<li class="gallery-card" data-modal-open data-id="${id}">
+  return `<li class="gallery-card" data-modal-open data-id="${id}">
       <img class = "poster"
         src= ${
           poster_path ||
           (backdrop_path !== undefined && poster_path) ||
           backdrop_path !== null
             ? poster
-            : '../../src/images/gallery/default_img.jpg'
+            : noImageUrl.pathname
         }
         alt="poster to film ${original_title}"
       />
@@ -49,6 +52,5 @@ export async function renderFilmList(
           1
         )}</span>
       </div>
-     </li>`
-  );
+     </li>`;
 }

@@ -1,23 +1,50 @@
-// пусті імпорти не видаляти,бо тільки з ними працює
-import { fetchGenre, fetchRandomFilm, fetchMovie } from './fetch';
-import { renderFilmList } from './renderFilmList';
+import {
+  fetchGenre,
+  fetchRandomFilm,
+  fetchMovie,
+  fetchPopularFilm,
+} from './fetch';
+import { prepareGalleryInfo } from './renderFilmList';
 import { saveToLS, loadFromLS } from './storage.js';
 import axios from 'axios';
-// import {
-//   BASE_URL,
-//   API_KEY,
-//   search_point,
-//   discover_point,
-//   genre_point,
-// } from './api';
+import {
+  BASE_URL,
+  API_KEY,
+  search_point,
+  discover_point,
+  genre_point,
+} from './api';
+import Pagination from 'tui-pagination';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { galleryRef, formRef } from './refs';
+// import { handleSearchFormSubmit } from './header';
+import 'tui-pagination/dist/tui-pagination.css';
+const container = document.getElementById('tui-pagination-container');
 
-// import { Loading } from 'notiflix/build/notiflix-loading-aio';
-// import { galleryRef, formRef } from './refs';
-import { handleSearchFormSubmit } from './header';
+async function markupPopularFilms() {
+  const { results } = await fetchPopularFilm(1);
 
-function markupRandomFilms() {
-  fetchRandomFilm().then(({ results }) =>
-    results.map(
+  render(results);
+  const instance_1 = new Pagination(container, {
+    totalItems: 500,
+    itemsPerPage: 10,
+    visiblePages: 5,
+    centerAlign: true,
+    page: 1,
+  });
+
+  instance_1.on('afterMove', async event => {
+    let currentPage = event.page;
+    const { results } = await fetchPopularFilm(currentPage);
+    render(results);
+  });
+}
+
+markupPopularFilms();
+
+export function render(results) {
+  const markup = results
+    .map(
       ({
         poster_path,
         backdrop_path,
@@ -28,7 +55,7 @@ function markupRandomFilms() {
         vote_average,
         id,
       }) =>
-        renderFilmList(
+        prepareGalleryInfo(
           poster_path,
           backdrop_path,
           original_title,
@@ -40,11 +67,9 @@ function markupRandomFilms() {
           findGenres
         )
     )
-  );
+    .join('');
+  galleryRef.innerHTML = markup;
 }
-
-markupRandomFilms();
-
 export async function findGenres(genre_ids) {
   if (!localStorage.getItem('genres')) {
     await fetchGenre();
