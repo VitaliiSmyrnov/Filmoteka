@@ -10,6 +10,9 @@ body.light-theme {
   .modal {
     background-color: $white-color;
   }
+   .tui-pagination .tui-page-btn {
+       border: none;
+   }
 }
 
 body.dark-theme {
@@ -32,12 +35,12 @@ body.dark-theme {
     border: none;
   }
 
-  .tui-pagination .tui-ico-ellip{
+  .tui-pagination .tui-ico-ellip {
     background-color: $white-color;
   }
 
   .tui-pagination .tui-ico-last {
-color: $white-color;
+    color: $white-color;
   }
 
   .modal {
@@ -55,10 +58,8 @@ color: $white-color;
   }
 
   .theme-switch__marker {
-      background-image: url(/src/images/change_theme/moon-25455.svg);
-      
+    background-image: url(/src/images/change_theme/moon-25455.svg);
   }
-
 }
 
 .theme-switch {
@@ -68,6 +69,10 @@ color: $white-color;
   padding: 16px 24px;
   right: 0;
   top: 150px;
+  @media screen and (max-width: $breakpoint-mobile) {
+    right: 0;
+    top: 0;
+  }
 }
 
 // .theme-switch__icon {
@@ -86,6 +91,10 @@ color: $white-color;
   height: 32px;
   border-radius: 50em;
   padding: 3px 0;
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 40px;
+    height: 15px;
+  }
 }
 
 .theme-switch__toggle {
@@ -125,15 +134,21 @@ color: $white-color;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   transform: translateX(3px);
   transition: transform 250ms var(--timing-function);
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .theme-switch__toggle:checked + .theme-switch__track {
   background-color: $white-color;
 }
 
-
 .theme-switch__toggle:checked ~ .theme-switch__marker {
   transform: translateX(35px);
+  @media screen and (max-width: $breakpoint-mobile) {
+    transform: translateX(25px);
+  }
 }
 
 .theme-switch__toggle:focus + .theme-switch__track,
