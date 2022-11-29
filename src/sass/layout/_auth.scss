@@ -7,6 +7,10 @@
   background-color: rgba(0, 0, 0, 0.6);
   opacity: 1;
   transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 110;
+  @media screen and (min-width: $breakpoint-tablet) {
+    left: 0;
+  }
 }
 
 .is-hidden {
@@ -30,14 +34,21 @@
   height: 320px;
   text-align: center;
   color: black;
-  background-color: rgb(207, 207, 207);
+  background-color: rgb(192, 37, 37);
   z-index: 4;
-  transform: translate(-50%, -50%) scale(1);
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(-50%, -50%);
+  // transform: translate(-50%, -50%) scale(1);
+  // transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .auth-btn {
   align-items: center;
+  &__img:hover,
+  &__img:focus {
+    transform: scale(1.2);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 .modal__auth-close {
@@ -53,40 +64,51 @@
   background-color: transparent;
   background-image: url(../images/close_auth.svg);
   cursor: pointer;
+  &:hover,
+  &:focus {
+    transform: scale(1.2);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 .login-title {
   font-size: 30px;
   font-weight: 500;
+  color: rgb(255, 255, 255);
 }
 
 .text-field {
-  padding: 12px 20px;
+  padding: 12px 54px;
   margin: 20px 0;
-  border: 1px solid black;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 2px;
   font-size: 12px;
 }
 
 .text-field:focus,
 .text-field:hover {
-  outline: 2px solid rgb(94, 0, 0);
+  outline: 2px solid rgb(255, 180, 180);
   border-color: transparent;
+  transform: scale(1.1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-style {
   padding: 14px 25px 14px 25px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 2px;
   background-color: white;
-  color: black;
+  color: rgb(146, 146, 146);
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
-  &:hover {
-    border-color: rgb(94, 0, 0);
-    background-color: rgb(94, 0, 0);
+  &:hover,
+  &:focus {
+    border-color: rgb(255, 180, 180);
+    background-color: rgb(255, 180, 180);
     color: white;
+    transform: scale(1.2);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -99,8 +121,13 @@
   line-height: 1;
   background: transparent;
 
-  &:hover {
-    color: rgb(94, 0, 0);
+  &:hover,
+  &:focus {
+    color: rgb(255, 180, 180);
+    transform: scale(1.2);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 1px 0px 2px rgb(255, 2, 2), 0 0 1em rgb(255, 255, 255),
+      0 0 0.2em rgb(255, 0, 0);
   }
 }
 
@@ -133,4 +160,9 @@
   line-height: 2;
   font-size: 12px;
   font-weight: 500;
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
