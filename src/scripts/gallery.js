@@ -21,7 +21,7 @@ import { galleryRef, formRef } from './refs';
 import 'tui-pagination/dist/tui-pagination.css';
 const container = document.getElementById('tui-pagination-container');
 
-async function markupPopularFilms() {
+export async function markupPopularFilms() {
   const { results } = await fetchPopularFilm(1);
 
   render(results);
@@ -40,7 +40,7 @@ async function markupPopularFilms() {
   });
 }
 
-markupPopularFilms();
+// markupPopularFilms();
 
 export function render(results) {
   console.log(results);
