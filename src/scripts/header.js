@@ -1,6 +1,7 @@
-import { fetchSearchFilm } from './fetch';
+import { fetchPopularFilm, fetchSearchFilm } from './fetch';
 import { render } from './gallery';
 import { container, formRef, galleryRef, notifyRef } from './refs';
+import { Loading } from 'notiflix';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
@@ -8,20 +9,30 @@ export async function handleSearchFormSubmit(e) {
   e.preventDefault();
   let query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
+
   if (!query.length) {
     notifyRef.textContent =
       'Search result not successful. Enter the correct movie name and try again';
-    return;
+    const { results } = await fetchPopularFilm(1);
+    Loading.arrows();
+    render(results);
+    Loading.remove();
   }
 
-  // notifyRef.textContent = '';
   const response = await fetchSearchFilm(query);
   const { results, total_pages } = response;
+  Loading.arrows();
+  render(results);
+  Loading.remove();
+
   if (!results.length) {
     notifyRef.textContent =
       ' Search result not successful. Enter the correct movie name and try again';
+    const { results } = await fetchPopularFilm(1);
+    Loading.arrows();
+    render(results);
+    Loading.remove();
   }
-  render(results);
 
   const instance_2 = new Pagination(container, {
     totalItems: total_pages > 500 ? 500 : total_pages,
@@ -51,7 +62,9 @@ export async function handleSearchFormSubmit(e) {
   instance_2.on('afterMove', async event => {
     let currentPage = event.page;
     const { results } = await fetchSearchFilm(query, currentPage);
+    Loading.arrows();
     render(results);
+    Loading.remove();
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
