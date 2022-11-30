@@ -62,7 +62,7 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-document.getElementById('reg-btn').addEventListener('click', function (openRegBtn) {
+document.getElementById('reg-btn').addEventListener('click', function () {
   document.getElementById('register-div').style.display = 'inline';
   document.getElementById('login-div').style.display = 'none';
 });
@@ -98,6 +98,8 @@ document.getElementById('register-btn').addEventListener('click', function () {
     .then(userCredential => {
       const user = userCredential.user;
       Notiflix.Notify.success('Succesful registration!');
+      document.getElementById('register-div').style.display = 'none';
+      document.getElementById('auth-div').style.display = 'none';
     })
     .catch(error => {
       const errorCode = error.code;
@@ -118,6 +120,6 @@ document.getElementById('log-out-btn').addEventListener('click', function () {
     })
     .catch(error => {
       Notiflix.Notify.failure('Oops! Something went wrong!');
-    });
-    openRegBtn();
+  });
+  
 });

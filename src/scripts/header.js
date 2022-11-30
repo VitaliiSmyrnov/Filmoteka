@@ -22,6 +22,7 @@ export async function handleSearchFormSubmit(e) {
   const response = await fetchSearchFilm(query);
   const { results, total_pages } = response;
   Loading.arrows();
+  notifyRef.textContent = '';
   render(results);
   Loading.remove();
 

@@ -1,12 +1,14 @@
 
-import { clickBox, inputChangeTheme } from "./refs";
+import { inputChangeTheme } from "./refs";
+
+const svgWhite = document.querySelector('.modal__close-btn');
 const Theme = {
     LIGHT: 'light-theme',
     DARK: 'dark-theme',
 };
 const {LIGHT, DARK} = Theme;
-document.body.classList.add(LIGHT); //ставим светлую тему по умолчанию
-const handleInputChange = (e) => { //если input checked включается темная тема, если нет, то остается светлая
+document.body.classList.add(LIGHT); 
+const handleInputChange = (e) => { 
     if(e.target.checked) {
         document.body.classList.replace(LIGHT, DARK);
         localStorage.setItem("Theme", DARK);
@@ -15,12 +17,12 @@ const handleInputChange = (e) => { //если input checked включается
         localStorage.setItem("Theme", LIGHT);
     }
 }
-const localStorageTheme = () => { //если тема в localStorage dark, то чекбокс ставим в положение true и устанавливаем темную тему
+const localStorageTheme = () => { 
     if(localStorage.getItem("Theme") === "dark-theme") {
         inputChangeTheme.checked = "true";
         document.body.classList.replace(LIGHT, DARK);
     }
     return
 }
-inputChangeTheme.addEventListener("change", handleInputChange); //вешаем слушателя событий на переключатель темы
+inputChangeTheme.addEventListener("change", handleInputChange);
 localStorageTheme()

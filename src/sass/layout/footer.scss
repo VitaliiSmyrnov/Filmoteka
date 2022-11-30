@@ -17,6 +17,10 @@
   text-align: center;
 
   color: $grey-color;
+  @media screen and (min-width: $breakpoint-tablet) {
+    font-size: 16px;
+    line-height: 1.18;
+  }
 }
 
 .footer__text--position {
@@ -102,6 +106,10 @@
     margin-bottom: 30px;
     font-size: 36px;
   }
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 50px;
+    font-size: 42px;
+  }
 }
 
 .team__list {
@@ -149,7 +157,7 @@
 
   @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
     width: 200px;
-    height: 284px;
+    height: 267px;
     &:nth-child(3) {
       margin-right: 0;
     }
@@ -163,7 +171,7 @@
     margin-bottom: 5px;
     @media screen and (min-width: $breakpoint-tablet) and (max-width: 1279px) {
       width: 220px;
-      height: 222px;
+      height: 198px;
 
       max-width: 100%;
     }
@@ -216,10 +224,67 @@
   top: 0;
   right: 16px;
   position: absolute;
+  @media screen and (min-width: 768px) {
+    max-width: 35px;
+    height: 35px;
+    top: 28px;
+    right: 57px;
+  }
   @media screen and (min-width: 1280px) {
     max-width: 40px;
     height: 40px;
     top: -123px;
     right: 58px;
+  }
+}
+
+.footer-team__name {
+  color: $text-accent-color;
+  margin-left: 5px;
+}
+
+.footer-icon {
+  display: inline;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.reserved {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: $grey-color;
+  @media screen and (max-width: 767px) {
+    margin-bottom: 5px;
+  }
+  @media screen and (min-width: $breakpoint-tablet) {
+    font-size: 16px;
+    line-height: 1.18;
+  }
+}
+
+.reserved_2 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: $grey-color;
+  @media screen and (min-width: $breakpoint-tablet) {
+    font-size: 16px;
+    line-height: 1.18;
+  }
+}
+
+.flex {
+  @media screen and (min-width: $breakpoint-tablet) {
+    display: flex;
+    justify-content: center;
   }
 }

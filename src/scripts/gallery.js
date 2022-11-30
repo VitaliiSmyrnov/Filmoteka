@@ -36,8 +36,8 @@ export async function markupPopularFilms() {
         '<span class="tui-ico-{{type}}">{{type}}</span>' +
         '</span>',
       moreButton:
-        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-        '<span class="tui-ico-ellip dots">...</span>' +
+        '<a href="#">' +
+        '<span>...</span>' +
         '</a>',
     },
   });
