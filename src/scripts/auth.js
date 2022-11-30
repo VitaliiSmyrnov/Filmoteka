@@ -62,7 +62,7 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-document.getElementById('reg-btn').addEventListener('click', function () {
+document.getElementById('reg-btn').addEventListener('click', function (openRegBtn) {
   document.getElementById('register-div').style.display = 'inline';
   document.getElementById('login-div').style.display = 'none';
 });
@@ -119,4 +119,5 @@ document.getElementById('log-out-btn').addEventListener('click', function () {
     .catch(error => {
       Notiflix.Notify.failure('Oops! Something went wrong!');
     });
+    openRegBtn();
 });
