@@ -13,6 +13,7 @@ body.light-theme {
   .tui-pagination .tui-page-btn {
     border: none;
   }
+
   .tui-pagination .tui-is-selected {
     background-color: $btn-accent-color;
   }
@@ -38,13 +39,6 @@ body.dark-theme {
     border: none;
   }
 
-//   .tui-pagination .tui-ico-ellip {
-//     background-color: $white-color;
-  
-//             // display: none;
-        
-//   }
-
   .tui-pagination .tui-ico-last {
     color: $white-color;
   }
@@ -64,8 +58,13 @@ body.dark-theme {
   }
 
   .theme-switch__marker {
-    background-image: url(/src/images/change_theme/moon-25455.svg);
+    background-image: url(/src/images/change_theme/moon-svgrepo_2.svg);
   }
+
+.modal__close-btn {
+  background-image: url(/src/images/close_white.svg);
+}
+
 }
 
 .theme-switch {
@@ -76,13 +75,6 @@ body.dark-theme {
   right: 0;
   top: 0;
 }
-
-// .theme-switch__icon {
-//   height: 40px;
-//   width: 40px;
-//   margin-right: 8px;
-//   margin-left: 8px;
-// }
 
 .theme-switch__control {
   display: flex;
@@ -143,7 +135,8 @@ body.dark-theme {
 }
 
 .theme-switch__toggle:checked + .theme-switch__track {
-  background-color: $white-color;
+  background-color: white;
+  ;
 }
 
 .theme-switch__toggle:checked ~ .theme-switch__marker {
@@ -153,7 +146,7 @@ body.dark-theme {
   }
 }
 
-.theme-switch__toggle:focus + .theme-switch__track,
-.theme-switch__toggle:active + .theme-switch__track {
-  box-shadow: 0 0 0 3px $btn-accent-color;
-}
+// .theme-switch__toggle:focus + .theme-switch__track,
+// .theme-switch__toggle:active + .theme-switch__track {
+//   box-shadow: 0 0 0 3px $btn-accent-color;
+// }
