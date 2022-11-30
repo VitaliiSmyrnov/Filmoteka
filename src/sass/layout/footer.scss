@@ -2,6 +2,10 @@
   background-color: $grey-bg-color;
   height: 100px;
   padding: 28px 36px 30px 48px;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    height: 77px;
+  }
 }
 
 .footer__text {

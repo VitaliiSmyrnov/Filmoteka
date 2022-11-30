@@ -13,12 +13,17 @@
     <link rel="stylesheet" href="./sass/main.scss" />
   </head>
   <body>
-    <include src="./partials/header-library.html"></include>
-    <include src="./partials/modal-auth.html"></include>
-    <include src="./partials/gallery.html"></include>
-    <include src="./partials/modal.html"></include>
-    <include src="./partials/theme-switcher.html"></include>
-    <include src="./partials/footer.html"></include>
+    <div class="wrapper_before_footer">
+      <include src="./partials/header-library.html"></include>
+     
+        <include src="./partials/modal-auth.html"></include>
+        <include src="./partials/gallery.html"></include>
+        <include src="./partials/modal.html"></include>
+        <include src="./partials/theme-switcher.html"></include>
+    </div>
+        <include src="./partials/footer.html"></include>
+    
+    
 
     <script type="module" src="./scripts/js-modal.js"></script>
     <script type="module" src="./scripts/auth.js"></script>

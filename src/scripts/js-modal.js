@@ -8,6 +8,8 @@ import {
 import { fetchMovie, fetchTrailerFilm } from './fetch';
 import renderModal from './renderModal';
 
+const modalWindow = document.querySelector('.modal');
+
 const LOCAL_STORAGE_WATCH_KEY = 'watch';
 const LOCAL_STORAGE_QUEUE_KEY = 'queue';
 const QUEUE_LIST_TYPE = 'QUEUE';
@@ -24,7 +26,7 @@ function openModal() {
 
   const addWatchBtn = document.querySelector('.film__button-add-to-watch');
   const addQueueBtn = document.querySelector('.film__button-add-to-queue');
-  const trailerBtn = document.querySelector('.film__trailer');
+  const trailerBtn = document.querySelector('.film__button-trailer');
 
   const isAddToWatch = isAdded(LOCAL_STORAGE_WATCH_KEY, searchId);
   const isAddToQueue = isAdded(LOCAL_STORAGE_QUEUE_KEY, searchId);
@@ -51,6 +53,8 @@ function openModal() {
 }
 
 function closeModal() {
+  // modalWindow.style.top = '50%';
+
   modal.classList.add('is-hidden');
   document.body.classList.remove('stop-scroll');
   window.removeEventListener('click', handleClickOnBackdrop);
@@ -179,6 +183,10 @@ function handleBtnTrailerClick(e) {
   const id = searchId;
   fetchTrailerFilm(id).then(({ results }) => {
     let key = results[0].key;
-    placeContainerElem.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    placeContainerElem.innerHTML = `<iframe class ="film__trailer" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   });
+  e.target.setAttribute('disabled', true);
+
+  // ======================================================================
+  // modalWindow.style.top = '86%';
 }
