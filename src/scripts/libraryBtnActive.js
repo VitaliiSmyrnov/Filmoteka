@@ -29,6 +29,7 @@ function emptyCollectionMarkup() {
   const markupcollection =
     `<li><img class="empty-collection-img" width="240" src=${noImgCollectionUrl.pathname}></li><li><p class="empty-collection-text">Collection is empty. You need to add a movie.</p></li>`;
     galleryRef.innerHTML = markupcollection;
+    galleryRef.classList.add('empty-gallery');
 }
 
 //============= Кнопка Watched ====================================
@@ -43,6 +44,9 @@ function onWatchedBtnClick() {
     if (arrayFromLSWatch.length === 0) {
       emptyCollectionMarkup();
       return;
+    }
+    if (galleryRef.classList.contains('empty-gallery')) {
+      galleryRef.classList.remove('empty-gallery');
     }
     const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
 
@@ -88,6 +92,13 @@ function onQueueBtnClick() {
   if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
     const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
     galleryRef.innerHTML = '';
+    if (arrayFromLSQueue.length === 0) {
+      emptyCollectionMarkup();
+      return;
+    }
+    if (galleryRef.classList.contains('empty-gallery')) {
+      galleryRef.classList.remove('empty-gallery');
+    }
     const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
 
     Promise.all(filmPromisesQueue).then(results => {
