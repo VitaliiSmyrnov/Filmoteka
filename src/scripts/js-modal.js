@@ -11,7 +11,7 @@ let searchId;
 closeModalBtn.addEventListener('click', closeModal);
 
 function openModal() {
-  modal.classList.remove('is-hidden');
+  modal.classList.remove('is-hidden-modal');
   document.body.classList.add('stop-scroll');
   window.addEventListener('click', handleClickOnBackdrop);
   window.addEventListener('keydown', handleKeyPress);
@@ -42,7 +42,7 @@ function openModal() {
 }
 
 function closeModal() {
-  modal.classList.add('is-hidden');
+  modal.classList.add('is-hidden-modal');
   document.body.classList.remove('stop-scroll');
   window.removeEventListener('click', handleClickOnBackdrop);
   window.removeEventListener('keydown', handleKeyPress);
