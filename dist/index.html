@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head><script src="/index.06f530a0.js"></script>
+  <head><script src="/index.7f9f0b32.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filmoteka project</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.fb37cf7d.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.bbade058.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.d883dc1a.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.db28b65c.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -50,7 +56,7 @@
   </div>
 </header>
 
-      <div class="backdrop-auth is-hidden" data-auth-modal="">
+      <div class="backdrop-auth is-hidden" id="auth-div" data-auth-modal="">
   <div class="center-box" id="login-div">
     <button type="button" class="modal__auth-close" data-login-close=""></button>
     <h2 class="login-title">Login</h2>
@@ -86,26 +92,20 @@
   <a id="go-top"></a>
 </section>
 
-          <div class="backdrop is-hidden" data-modal="">
-      <div class="modal">
-        <button type="button" class="modal__close-btn" data-modal-close=""></button>
-        <div class="modal__wrapper"></div>
-      </div>
-    </div>
+      <div class="backdrop is-hidden-modal" data-modal="">
+  <div class="modal">
+    <button type="button" class="modal__close-btn" data-modal-close=""></button>
+    <div class="modal__wrapper"></div>
+  </div>
+</div>
 
-
-      <!-- Разметка переключателя темы -->
-<div class="theme-switch">
-   <!-- <img src="./images/change_theme/sun-151763_1.svg" class="theme-switch__icon" alt="icon sun"> -->
-
+      <div class="theme-switch">
     <div class="theme-switch__control">
-        <input class="theme-switch__toggle" type="checkbox" name="theme" id="theme-switch-toggle" aria-label="Переключить между тёмной и светлой темой">
+        <input class="theme-switch__toggle" type="checkbox" name="theme" id="theme-switch-toggle" aria-label="switchtheme">
         <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle">
         </label>
         <div aria-hidden="true" class="theme-switch__marker"></div>
     </div>
-
-    <!-- <img src="./images/change_theme/moon-25455.svg" class="theme-switch__icon" alt="icon moon"> -->
 </div>
 
     </div>

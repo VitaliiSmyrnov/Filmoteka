@@ -34,14 +34,12 @@ export {
   closeModalBtn,
   modal,
   containerElem,
-  addWatchBtn,
   goTop,
   headerContainer,
   footerModal,
   openTeamModal,
   closeTeamModal,
   backdrop,
-  addQueueBtn,
   openModalAuth,
   closeLoginBtn,
   closeRegBtn,
@@ -52,5 +50,4 @@ export {
   headerLibrary,
   notifyRef,
   container,
-
 };
