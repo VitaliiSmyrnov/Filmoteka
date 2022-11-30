@@ -62,7 +62,7 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-document.getElementById('reg-btn').addEventListener('click', function () {
+document.getElementById('reg-btn').addEventListener('click', function (openRegBtn) {
   document.getElementById('register-div').style.display = 'inline';
   document.getElementById('login-div').style.display = 'none';
 });
@@ -77,10 +77,8 @@ document.getElementById('login-btn').addEventListener('click', function () {
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then(userCredential => {
       const user = userCredential.user;
-      document.getElementById('result-box').style.display = 'inline';
-      document.getElementById('login-div').style.display = 'none';
-      document.getElementById('result').innerHTML = 'Welcome back!'; 
-      document.getElementById('result-box').style.textAlign = 'center';
+      Notiflix.Notify.success('Welcome!')
+      document.getElementById('auth-div').style.display = 'none';
       openModalAuth.style.display = 'none';
       document.getElementById('auth-btn-icon').style.display = 'none';
       document.getElementById('log-out-btn').style.display = 'block';
@@ -89,12 +87,7 @@ document.getElementById('login-btn').addEventListener('click', function () {
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      document.getElementById('result-box').style.display = 'inline';
-      document.getElementById('login-div').style.display = 'none';
-      document.getElementById('result').innerHTML =
-        'Something went wrong.<br>' +
-        'Please check your email or password.';
-      document.getElementById('result').style.textAlign = 'center';
+      Notiflix.Notify.failure('Oops! Something went wrong! Please check your email or password.');
     });
 });
 
@@ -104,21 +97,12 @@ document.getElementById('register-btn').addEventListener('click', function () {
   createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
     .then(userCredential => {
       const user = userCredential.user;
-      document.getElementById('result-box').style.display = 'inline';
-      document.getElementById('register-div').style.display = 'none';
-      document.getElementById('result').innerHTML =
-        'Successful registration!';
-      document.getElementById('result').style.textAlign = 'center';
+      Notiflix.Notify.success('Succesful registration!');
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      document.getElementById('result-box').style.display = 'inline';
-      document.getElementById('register-div').style.display = 'none';
-      document.getElementById('result').innerHTML =
-        'Oops! <br> Something went wrong!<br>' +
-        'Check your email or password please.';
-      document.getElementById('result-box').style.textAlign = 'center';
+      Notiflix.Notify.failure('Oops! Something went wrong! Check your email or password please.');       
     });
 });
 
@@ -130,10 +114,10 @@ document.getElementById('log-out-btn').addEventListener('click', function () {
       openModalAuth.style.display = 'inline';
       document.getElementById('auth-btn-icon').style.display = 'inline';
       document.getElementById('log-out-btn').style.display = 'none';
+      Notiflix.Notify.warning('You have logged out!');
     })
     .catch(error => {
-      document.getElementById('result').innerHTML =
-        'Sorry! <br> Something is wrong.<br>';
-      document.getElementById('result').style.textAlign = 'center';
+      Notiflix.Notify.failure('Oops! Something went wrong!');
     });
+    openRegBtn();
 });

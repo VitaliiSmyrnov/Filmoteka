@@ -13,7 +13,9 @@ export async function markupPopularFilms() {
 
   const response = await fetchPopularFilm(1);
   const { results, total_pages } = response;
+  Loading.arrows();
   render(results);
+  Loading.remove();
 
   const instance_1 = new Pagination(container, {
     totalItems: total_pages > 500 ? 500 : total_pages,
@@ -43,11 +45,15 @@ export async function markupPopularFilms() {
   instance_1.on('afterMove', async event => {
     let currentPage = event.page;
     const { results } = await fetchPopularFilm(currentPage);
+    Loading.arrows();
     render(results);
+    Loading.remove();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   });
 }
-
-// markupPopularFilms();
 
 export function render(results) {
   const markup = results

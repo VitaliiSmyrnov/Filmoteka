@@ -10,15 +10,18 @@ body.light-theme {
   .modal {
     background-color: $white-color;
   }
-   .tui-pagination .tui-page-btn {
-       border: none;
-   }
+  .tui-pagination .tui-page-btn {
+    border: none;
+  }
 }
 
 body.dark-theme {
   background-color: $dark-theme-bg-color;
 
   .gallery_info-title {
+    color: $white-color;
+  }
+  .empty-gallery {
     color: $white-color;
   }
   .footer {
