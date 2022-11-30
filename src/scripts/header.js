@@ -1,80 +1,58 @@
-import { fetchRandomFilm, fetchSearchFilm } from './fetch';
-import { findGenres } from './gallery';
-import { formRef, galleryRef } from './refs';
-import { renderFilmList } from './renderFilmList';
-
-const notifyRef = document.querySelector('.form__search-fail');
-
-export let query = {};
+import { fetchSearchFilm } from './fetch';
+import { render } from './gallery';
+import { container, formRef, galleryRef, notifyRef } from './refs';
+import Pagination from 'tui-pagination';
+import 'tui-pagination/dist/tui-pagination.css';
 
 export function handleSearchFormSubmit(e) {
   e.preventDefault();
-  query.query = e.target.elements['search-input'].value.trim();
+  let query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
-  if (!query.query.length) {
-    notFound();
+  if (!query.length) {
+    notifyRef.textContent =
+      'Search result not successful. Enter the correct movie name and try again';
     return;
   }
-  notifyRef.textContent = '';
-  fetchSearchFilm(query.query).then(({ results }) => {
-    if (!results.length) {
-      notFound();
-    }
-    results.map(
-      ({
-        poster_path,
-        backdrop_path,
-        original_title,
-        title,
-        genre_ids,
-        release_date,
-        vote_average,
-        id,
-      }) => {
-        return renderFilmList(
-          poster_path,
-          backdrop_path,
-          original_title,
-          title,
-          genre_ids,
-          release_date,
-          vote_average,
-          id,
-          findGenres
-        );
-      }
-    );
-  });
-}
 
-function notFound() {
-  notifyRef.textContent =
-    'Search result not successful. Enter the correct movie name';
-  fetchRandomFilm().then(({ results }) => {
-    results.map(
-      ({
-        poster_path,
-        backdrop_path,
-        original_title,
-        title,
-        genre_ids,
-        release_date,
-        vote_average,
-      }) => {
-        renderFilmList(
-          poster_path,
-          backdrop_path,
-          original_title,
-          title,
-          genre_ids,
-          release_date,
-          vote_average,
-          findGenres
-        );
-      }
-    );
+  const instance_2 = new Pagination(container, {
+    totalItems: 500,
+    itemsPerPage: 10,
+    visiblePages: 5,
+    centerAlign: true,
+    page: 1,
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage:
+        '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+        '<span class="tui-ico-ellip dots">...</span>' +
+        '</a>',
+    },
   });
-  return;
+
+  instance_2.on('afterMove', async event => {
+    let currentPage = event.page;
+    const { results } = await fetchSearchFilm(query, currentPage);
+    render(results);
+  });
+
+  notifyRef.textContent = '';
+  fetchSearchFilm(query).then(({ results }) => {
+    if (!results.length) {
+      notifyRef.textContent =
+        " 'Search result not successful. Enter the correct movie name and try again';";
+    }
+    render(results);
+  });
 }
 
 formRef.addEventListener('submit', handleSearchFormSubmit);

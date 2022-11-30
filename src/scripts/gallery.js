@@ -1,22 +1,57 @@
-import { fetchGenre, fetchRandomFilm, fetchMovie } from './fetch';
-import { renderFilmList } from './renderFilmList';
-import { saveToLS, loadFromLS } from './storage.js';
-import axios from 'axios';
-import {
-  BASE_URL,
-  API_KEY,
-  search_point,
-  discover_point,
-  genre_point,
-} from './api';
+import { fetchGenre, fetchPopularFilm } from './fetch';
+import { prepareGalleryInfo } from './renderFilmList';
 
+import Pagination from 'tui-pagination';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
-import { galleryRef, formRef } from './refs';
-// import { handleSearchFormSubmit } from './header';
+import { container, galleryRef } from './refs';
+import 'tui-pagination/dist/tui-pagination.css';
 
-function markupRandomFilms() {
-  fetchRandomFilm().then(({ results }) =>
-    results.map(
+export async function markupPopularFilms() {
+  if (!localStorage.getItem('genres')) {
+    await fetchGenre();
+  }
+
+  const response = await fetchPopularFilm(1);
+  const { results, total_pages } = response;
+  render(results);
+
+  const instance_1 = new Pagination(container, {
+    totalItems: total_pages > 500 ? 500 : total_pages,
+    itemsPerPage: 1,
+    visiblePages: 5,
+    centerAlign: true,
+    page: 1,
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage:
+        '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+        '<span class="tui-ico-ellip dots">...</span>' +
+        '</a>',
+    },
+  });
+
+  instance_1.on('afterMove', async event => {
+    let currentPage = event.page;
+    const { results } = await fetchPopularFilm(currentPage);
+    render(results);
+  });
+}
+
+// markupPopularFilms();
+
+export function render(results) {
+  const markup = results
+    .map(
       ({
         poster_path,
         backdrop_path,
@@ -27,7 +62,7 @@ function markupRandomFilms() {
         vote_average,
         id,
       }) =>
-        renderFilmList(
+        prepareGalleryInfo(
           poster_path,
           backdrop_path,
           original_title,
@@ -39,15 +74,11 @@ function markupRandomFilms() {
           findGenres
         )
     )
-  );
+    .join('');
+  galleryRef.innerHTML = markup;
 }
 
-markupRandomFilms();
-
-export async function findGenres(genre_ids) {
-  if (!localStorage.getItem('genres')) {
-    await fetchGenre();
-  }
+export function findGenres(genre_ids) {
   try {
     const genresObj = JSON.parse(localStorage.getItem('genres'));
     const { genres } = genresObj;
@@ -58,126 +89,3 @@ export async function findGenres(genre_ids) {
     console.log(error);
   }
 }
-
-//=========== натискання на посилання MY LIBRARY =========================
-const myLibraryRef = document.querySelector('.library-item');
-
-function onMyLibraryLinkClick() {
-  console.log('клік працює');
-  // formRef.removeEventListener('submit', handleSearchFormSubmit);
-
-  // galleryRef.innerHTML = '';
-  onWatchedBtnClick();
-}
-
-myLibraryRef.addEventListener('click', onMyLibraryLinkClick);
-
-//============= Кнопка add to Watched ====================================
-// const arrayFilmWatched = [];
-// const addWatchedBtnRef = document.querySelector('button[data-action="addWatched"]');
-
-// async function onAddWatchedBtnClick() {
-//   const randomId = Math.round(Math.random() * (100 - 1) + 1);
-//   const value = await fetchFilmById(randomId);
-//   const emptyValue = !Object.keys(value).length;
-//   // const myValue = {[randomId]: value};
-//   if (emptyValue) return;
-//   arrayFilmWatched.push(value);
-
-//   saveToLS(LOCALSTORAGE_KEY_WATCHED, arrayFilmWatched);
-// }
-
-// addWatchedBtnRef.addEventListener('click', onAddWatchedBtnClick);
-
-// async function fetchFilmById(movie_id) {
-//   try {
-//     const response = await axios.get(
-//       `${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-//============= Кнопка Watched ====================================
-// const LOCALSTORAGE_KEY_WATCHED = "watch";
-// const watchedBtnRef = document.querySelector('button[data-action="watched"]');
-
-// function onWatchedBtnClick() {
-
-//   if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
-//     const arrayFromLSWatch = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
-//     galleryRef.innerHTML = '';
-//     const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
-
-//     Promise.all(filmPromisesWatch).then(results =>
-//      results.map(
-//      ({
-//        poster_path,
-//        backdrop_path,
-//        original_title,
-//        title,
-//        genres,
-//        release_date,
-//        vote_average,
-//        id,
-//      }) =>
-//        renderFilmList(
-//          poster_path,
-//          backdrop_path,
-//          original_title,
-//          title,
-//          genres,
-//          release_date,
-//          vote_average,
-//          id,
-//          findGenres
-//        )
-//        ));
-//    }
-//     }
-
-// watchedBtnRef.addEventListener('click', onWatchedBtnClick);
-
-//============= Кнопка add to Queue ====================================
-
-//============= Кнопка Queue ====================================
-// const LOCALSTORAGE_KEY_QUEUE = "queue";
-// const queueBtnRef = document.querySelector('button[data-action="queue"]');
-
-// function onQueueBtnClick() {
-
-//     if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
-//        const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
-//        galleryRef.innerHTML = '';
-//        const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
-
-//        Promise.all(filmPromisesQueue).then(results =>
-//         results.map(
-//         ({
-//           poster_path,
-//           backdrop_path,
-//           original_title,
-//           title,
-//           genres,
-//           release_date,
-//           vote_average,
-//           id,
-//         }) =>
-//           renderFilmList(
-//             poster_path,
-//             backdrop_path,
-//             original_title,
-//             title,
-//             genres,
-//             release_date,
-//             vote_average,
-//             id,
-//             findGenres
-//           )
-//           ));
-//       }
-//     }
-
-// queueBtnRef.addEventListener('click', onQueueBtnClick);

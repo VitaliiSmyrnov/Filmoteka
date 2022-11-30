@@ -14,6 +14,19 @@ const openTeamModal = document.querySelector('.footer-team__name');
 const closeTeamModal = document.querySelector('#teammates');
 const backdrop = document.querySelector('.backdrop__footer');
 
+const clickBox = document.querySelector('#theme-switch-toggle');
+const inputChangeTheme = document.querySelector('.theme-switch__toggle');
+
+const notifyRef = document.querySelector('.form__search-fail');
+const container = document.getElementById('tui-pagination-container');
+
+const openModalAuth = document.querySelector('[data-auth-open]');
+const closeLoginBtn = document.querySelector('[data-login-close]');
+const closeRegBtn = document.querySelector('[data-register-close]');
+const closeResultBtn = document.querySelector('[data-result-close]');
+const modalAuth = document.querySelector('[data-auth-modal]');
+const headerLibrary = document.querySelector('.library-item');
+
 export {
   galleryRef,
   formRef,
@@ -29,4 +42,15 @@ export {
   closeTeamModal,
   backdrop,
   addQueueBtn,
+  openModalAuth,
+  closeLoginBtn,
+  closeRegBtn,
+  closeResultBtn,
+  modalAuth,
+  clickBox,
+  inputChangeTheme,
+  headerLibrary,
+  notifyRef,
+  container,
+
 };

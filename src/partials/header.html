@@ -14,22 +14,25 @@
         <a class="logo__text" href="./index.html">Filmoteka</a>
       </div>
       <div class="auth">
-        <a href="#" class="auth__link">
+        <button type="button" class="auth-btn" data-auth-open>
           <img
             src="./images/header/icons-avtorize.png"
-            alt="authorization image"
+            alt="user-icon"
+            id="auth-btn-icon"
+            class="auth-btn__img"
             width="13"
             height="13"
           />
-        </a>
-        <a href="#" class="auth__text">Registration</a>
+        </button>
+        <button id="log-out-btn" class="auth-btn">Log out</button>
       </div>
+
       <nav class="header__nav">
         <ul class="header__nav-list">
           <li class="header__nav-item">
             <a
               href="./index.html"
-              class="header__nav-link header__nav-link--current"
+              class="header__nav-link header__nav-link__current"
             >
               HOME
             </a>
@@ -51,8 +54,6 @@
         <img src="./images/header/search.svg" alt="" />
       </button>
     </form>
-    <p class="form__search-fail is-hidden-text">
-      Search result not successful. Enter the correct movie name and try again
-    </p>
+    <p class="form__search-fail"></p>
   </div>
 </header>
