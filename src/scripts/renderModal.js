@@ -11,13 +11,11 @@ function renderModal({
   overview,
   poster_path,
 }) {
-  //   console.log(genres);
   const ganresMarkup = genres
     .map(genre => {
       return genre.name;
     })
     .join(', ');
-  //   console.log(ganresMarkup);
   const markup = `<div class ="film__content-wrapper"><img class="film__poster" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="Poster to film ${original_title}" />
           <div class="film__content-wrapper--main">
             <h1 class="film__title">${title.toUpperCase()}</h1>
