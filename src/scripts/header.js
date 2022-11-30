@@ -4,7 +4,7 @@ import { container, formRef, galleryRef, notifyRef } from './refs';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
-export function handleSearchFormSubmit(e) {
+export async function handleSearchFormSubmit(e) {
   e.preventDefault();
   let query = e.target.elements['search-input'].value.trim();
   galleryRef.innerHTML = '';
@@ -14,9 +14,18 @@ export function handleSearchFormSubmit(e) {
     return;
   }
 
+  // notifyRef.textContent = '';
+  const response = await fetchSearchFilm(query);
+  const { results, total_pages } = response;
+  if (!results.length) {
+    notifyRef.textContent =
+      ' Search result not successful. Enter the correct movie name and try again';
+  }
+  render(results);
+
   const instance_2 = new Pagination(container, {
-    totalItems: 500,
-    itemsPerPage: 10,
+    totalItems: total_pages > 500 ? 500 : total_pages,
+    itemsPerPage: 1,
     visiblePages: 5,
     centerAlign: true,
     page: 1,
@@ -43,15 +52,10 @@ export function handleSearchFormSubmit(e) {
     let currentPage = event.page;
     const { results } = await fetchSearchFilm(query, currentPage);
     render(results);
-  });
-
-  notifyRef.textContent = '';
-  fetchSearchFilm(query).then(({ results }) => {
-    if (!results.length) {
-      notifyRef.textContent =
-        " 'Search result not successful. Enter the correct movie name and try again';";
-    }
-    render(results);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   });
 }
 

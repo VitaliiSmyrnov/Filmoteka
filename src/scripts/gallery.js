@@ -44,10 +44,12 @@ export async function markupPopularFilms() {
     let currentPage = event.page;
     const { results } = await fetchPopularFilm(currentPage);
     render(results);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   });
 }
-
-// markupPopularFilms();
 
 export function render(results) {
   const markup = results
