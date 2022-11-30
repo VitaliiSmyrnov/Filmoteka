@@ -4,7 +4,6 @@ import { prepareGalleryInfo, renderFilmList } from './renderFilmList';
 import { loadFromLS } from './storage.js';
 import { galleryRef } from './refs';
 
-
 const watchedBtn = document.querySelector('[data-id="watched-btn"]');
 const queueBtn = document.querySelector('[data-id="queue-btn"]');
 const watchedSet = document.querySelector('.library-buttons__wrapper');
@@ -20,6 +19,18 @@ function makeActiveBtn(e) {
   return;
 }
 
+//============= повідомлення при порожній колекції ===============
+const noImgCollectionUrl = new URL(
+  '../images/gallery/empty-collection-min.png',
+  import.meta.url
+);
+
+function emptyCollectionMarkup() {
+  const markupcollection =
+    `<li><img class="empty-collection-img" width="240" src=${noImgCollectionUrl.pathname}></li><li><p class="empty-collection-text">Collection is empty. You need to add a movie.</p></li>`;
+    galleryRef.innerHTML = markupcollection;
+    galleryRef.classList.add('empty-gallery');
+}
 
 //============= Кнопка Watched ====================================
 const LOCALSTORAGE_KEY_WATCHED = 'watch';
@@ -30,37 +41,45 @@ function onWatchedBtnClick() {
   if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
     const arrayFromLSWatch = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
     galleryRef.innerHTML = '';
+    if (arrayFromLSWatch.length === 0) {
+      emptyCollectionMarkup();
+      return;
+    }
+    if (galleryRef.classList.contains('empty-gallery')) {
+      galleryRef.classList.remove('empty-gallery');
+    }
     const filmPromisesWatch = arrayFromLSWatch.map(id => fetchMovie(id));
 
     Promise.all(filmPromisesWatch).then(results => {
-      const markup = results.map(
-        ({
-          poster_path,
-          backdrop_path,
-          original_title,
-          title,
-          genres,
-          release_date,
-          vote_average,
-          id,
-        }) => {
-          const genres_ids = genres.map((genre) => genre.id);
-          return prepareGalleryInfo(
+      const markup = results
+        .map(
+          ({
             poster_path,
             backdrop_path,
             original_title,
             title,
-            genres_ids,
+            genres,
             release_date,
             vote_average,
             id,
-            findGenres
-          );
-        }
-      ).join('');
+          }) => {
+            const genres_ids = genres.map(genre => genre.id);
+            return prepareGalleryInfo(
+              poster_path,
+              backdrop_path,
+              original_title,
+              title,
+              genres_ids,
+              release_date,
+              vote_average,
+              id,
+              findGenres
+            );
+          }
+        )
+        .join('');
       galleryRef.innerHTML = markup;
-    }
-    );
+    });
   }
 }
 
@@ -73,37 +92,45 @@ function onQueueBtnClick() {
   if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
     const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
     galleryRef.innerHTML = '';
+    if (arrayFromLSQueue.length === 0) {
+      emptyCollectionMarkup();
+      return;
+    }
+    if (galleryRef.classList.contains('empty-gallery')) {
+      galleryRef.classList.remove('empty-gallery');
+    }
     const filmPromisesQueue = arrayFromLSQueue.map(id => fetchMovie(id));
 
     Promise.all(filmPromisesQueue).then(results => {
-      const markup = results.map(
-        ({
-          poster_path,
-          backdrop_path,
-          original_title,
-          title,
-          genres,
-          release_date,
-          vote_average,
-          id,
-        }) => {
-          const genres_ids = genres.map((genre) => genre.id);
-          return prepareGalleryInfo(
+      const markup = results
+        .map(
+          ({
             poster_path,
             backdrop_path,
             original_title,
             title,
-            genres_ids,
+            genres,
             release_date,
             vote_average,
             id,
-            findGenres
-          );
-        }
-      ).join('');
+          }) => {
+            const genres_ids = genres.map(genre => genre.id);
+            return prepareGalleryInfo(
+              poster_path,
+              backdrop_path,
+              original_title,
+              title,
+              genres_ids,
+              release_date,
+              vote_average,
+              id,
+              findGenres
+            );
+          }
+        )
+        .join('');
       galleryRef.innerHTML = markup;
-    }
-    );
+    });
   }
 }
 

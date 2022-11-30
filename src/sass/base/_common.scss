@@ -150,3 +150,11 @@ button {
 input {
   cursor: pointer;
 }
+
+.wrapper_before_footer {
+  min-height: calc(100vh - 100px);
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    min-height: calc(100vh - 77px);
+  }
+}
