@@ -15,7 +15,7 @@ export function prepareGalleryInfo(
   findGenres
 ) {
   const hiddenClass =
-    window.location.pathname === '/index.html' ? 'visually-hidden' : '';
+    !window.location.pathname.includes('/library.html') ? 'visually-hidden' : '';
   const genreaMarkup = findGenres(genre_ids).join(', ');
   const poster = `https://image.tmdb.org/t/p/original${
     poster_path || backdrop_path

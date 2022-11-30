@@ -38,9 +38,14 @@ const LOCALSTORAGE_KEY_WATCHED = 'watch';
 onWatchedBtnClick();
 
 function onWatchedBtnClick() {
+  galleryRef.innerHTML = '';
+  if (!localStorage[LOCALSTORAGE_KEY_WATCHED]) {
+    emptyCollectionMarkup();
+    return;
+  }
+ 
   if (localStorage[LOCALSTORAGE_KEY_WATCHED]) {
     const arrayFromLSWatch = loadFromLS(LOCALSTORAGE_KEY_WATCHED);
-    galleryRef.innerHTML = '';
     if (arrayFromLSWatch.length === 0) {
       emptyCollectionMarkup();
       return;
@@ -89,9 +94,13 @@ watchedBtn.addEventListener('click', onWatchedBtnClick);
 const LOCALSTORAGE_KEY_QUEUE = 'queue';
 
 function onQueueBtnClick() {
+  galleryRef.innerHTML = '';
+  if (!localStorage[LOCALSTORAGE_KEY_QUEUE]) {
+    emptyCollectionMarkup();
+    return;
+  }
   if (localStorage[LOCALSTORAGE_KEY_QUEUE]) {
     const arrayFromLSQueue = loadFromLS(LOCALSTORAGE_KEY_QUEUE);
-    galleryRef.innerHTML = '';
     if (arrayFromLSQueue.length === 0) {
       emptyCollectionMarkup();
       return;
