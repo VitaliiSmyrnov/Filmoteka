@@ -98,6 +98,8 @@ document.getElementById('register-btn').addEventListener('click', function () {
     .then(userCredential => {
       const user = userCredential.user;
       Notiflix.Notify.success('Succesful registration!');
+      document.getElementById('register-div').style.display = 'none';
+      document.getElementById('auth-div').style.display = 'none';
     })
     .catch(error => {
       const errorCode = error.code;
