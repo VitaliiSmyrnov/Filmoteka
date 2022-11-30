@@ -19,10 +19,10 @@ body.stop-scroll {
   background-color: rgba(0, 0, 0, 0.2);
 
   @media screen and (min-width: $breakpoint-tablet) {
-    overflow: hidden;
+    overflow: scroll;
   }
   @media screen and (min-width: $breakpoint-decktop) {
-    overflow: hidden;
+    overflow: scroll;
   }
 }
 
@@ -40,7 +40,9 @@ body.stop-scroll {
   z-index: 10;
 
   width: 280px;
-  height: 940px;
+  min-height: 500px;
+  height: auto;
+
   margin-top: 30px;
 
   padding: 0 20px;
@@ -63,7 +65,7 @@ body.stop-scroll {
   @media screen and (min-width: $breakpoint-decktop) {
     margin: 0 auto;
     width: 806px;
-    height: 558px;
+    height: auto;
     padding: 40px 12px;
   }
 }
@@ -101,9 +103,16 @@ body.stop-scroll {
 
   @media screen and (min-width: $breakpoint-tablet) {
     display: flex;
+    flex-direction: column;
   }
 
   @media screen and (min-width: $breakpoint-decktop) {
+  }
+}
+
+.film__content-wrapper {
+  @media screen and (min-width: $breakpoint-tablet) {
+    display: flex;
   }
 }
 
@@ -209,7 +218,6 @@ body.stop-scroll {
 .film__button-add-to-watch {
   width: 110px;
   height: 44px;
-  //   padding: 0;
   font-size: 12px;
   line-height: 1.33;
   font-weight: 500;
@@ -260,7 +268,8 @@ body.stop-scroll {
   }
   @media screen and (min-width: $breakpoint-decktop) {
     width: 136px;
-    line-height: 1.33;
+    line-height: 1.13;
+    padding: 0 10px;
   }
 
   &:hover,
@@ -277,5 +286,67 @@ body.stop-scroll {
   &:focus {
     transform: scale(1);
     box-shadow: 0 0 5px 3px rgba(99, 98, 98, 0.514);
+  }
+}
+
+.film__button-trailer {
+  display: block;
+  width: 110px;
+  height: 44px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 500;
+  color: rgba(241, 233, 190, 0.897);
+  background-color: rgba(190, 63, 4, 0.897);
+  border-radius: 5px;
+  border: 1px solid rgba(226, 167, 77, 0.897);
+  text-align: center;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    width: 123px;
+    line-height: 1.15;
+  }
+  @media screen and (min-width: $breakpoint-decktop) {
+    width: 136px;
+    line-height: 1.15;
+    margin-right: 172px;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.2);
+    box-shadow: 0 0 5px 3px rgba(255, 115, 0, 0.42);
+  }
+
+  &[disabled='true'] {
+    color: rgba(224, 222, 210, 0.774);
+    background-color: rgba(190, 63, 4, 0.644);
+
+    &:hover,
+    &:focus {
+      transform: scale(1);
+      box-shadow: 0 0 5px 3px rgba(99, 98, 98, 0.514);
+    }
+  }
+}
+
+.film__trailer {
+  margin-top: 10px;
+  width: 240px;
+  height: 155px;
+  @media screen and (min-width: $breakpoint-tablet) {
+    width: 590px;
+    height: 350px;
+    margin-left: 18px;
+  }
+  @media screen and (min-width: $breakpoint-decktop) {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
   }
 }

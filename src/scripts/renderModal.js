@@ -18,8 +18,8 @@ function renderModal({
     })
     .join(', ');
   //   console.log(ganresMarkup);
-  const markup = ` <img class="film__poster" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="Poster to film ${original_title}" />
-          <div class="film__content-wrapper">
+  const markup = `<div class ="film__content-wrapper"><img class="film__poster" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="Poster to film ${original_title}" />
+          <div class="film__content-wrapper--main">
             <h1 class="film__title">${title.toUpperCase()}</h1>
             <ul class="film__properties-list">
               <li class="film__properties-item">
@@ -49,9 +49,9 @@ function renderModal({
           </button>
           <button class="film__button-add-to-queue" type="button">
             ADD TO QUEUE
-          </button> <button class="film__trailer" type="button">
+          </button> <button class="film__button-trailer" type="button">
             WATCH TRAILER
-          </button></div><div class="film__trailer-place"></div>`;
+          </button></div></div><div class="film__trailer-place"></div>`;
 
   containerElem.insertAdjacentHTML('afterbegin', markup);
 }
