@@ -306,11 +306,12 @@ body.stop-scroll {
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @media screen and (min-width: $breakpoint-tablet) {
-    width: 123px;
+    width: 133px;
+
     line-height: 1.15;
   }
   @media screen and (min-width: $breakpoint-decktop) {
-    width: 136px;
+    width: 144px;
     line-height: 1.15;
     margin-right: 172px;
   }
@@ -319,6 +320,11 @@ body.stop-scroll {
   &:focus {
     transform: scale(1.2);
     box-shadow: 0 0 5px 3px rgba(255, 115, 0, 0.42);
+    span {
+      width: 22px;
+      height: 16px;
+      top: 3px;
+    }
   }
 
   &[disabled='true'] {
@@ -346,5 +352,20 @@ body.stop-scroll {
     width: 100%;
     margin: 0 auto;
     margin-top: 20px;
+  }
+}
+
+.youtube-icon {
+  background-image: url(/src/images/youtube.svg);
+  background-position: center;
+  background-size: cover;
+  margin-left: 5px;
+  position: relative;
+  top: 3px;
+  display: inline-block;
+  width: 20px;
+  height: 13px;
+  @media screen and (min-width: $breakpoint-decktop) {
+    top: 2px;
   }
 }
