@@ -48,7 +48,7 @@ function renderModal({
           <button class="film__button-add-to-queue" type="button">
             ADD TO QUEUE
           </button> <button class="film__button-trailer" type="button">
-            WATCH TRAILER
+            WATCH TRAILER<span class="youtube-icon"></span>
           </button></div></div><div class="film__trailer-place"></div>`;
 
   containerElem.insertAdjacentHTML('afterbegin', markup);
