@@ -1,5 +1,3 @@
-import { Loading } from 'notiflix';
-
 const noImageUrl = new URL(
   '../images/gallery/default_img.jpg',
   import.meta.url
@@ -16,9 +14,8 @@ export function prepareGalleryInfo(
   id,
   findGenres
 ) {
-  // Loading.arrows();
   const hiddenClass =
-    window.location.pathname === '/index.html' ? 'visually-hidden' : '';
+    !window.location.pathname.includes('/library.html') ? 'visually-hidden' : '';
   const genreaMarkup = findGenres(genre_ids).join(', ');
   const poster = `https://image.tmdb.org/t/p/original${
     poster_path || backdrop_path

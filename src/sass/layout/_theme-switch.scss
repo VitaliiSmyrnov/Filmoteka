@@ -1,14 +1,29 @@
+body.light-theme {
+  background-color: #fff;
+  color: $black-color;
+  .footer {
+    background-color: $grey-bg-color;
+  }
+  .footer__text {
+    color: $grey-color;
+  }
+  .modal {
+    background-color: $white-color;
+  }
+  .tui-pagination .tui-page-btn {
+    border: none;
+  }
+}
+
 body.dark-theme {
   background-color: $dark-theme-bg-color;
 
   .gallery_info-title {
     color: $white-color;
   }
-
   .empty-gallery {
     color: $white-color;
   }
-
   .footer {
     background-color: $dark-theme-footer-bg-color;
   }

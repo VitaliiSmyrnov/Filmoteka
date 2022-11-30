@@ -1,10 +1,4 @@
-import {
-  galleryRef,
-  containerElem,
-  closeModalBtn,
-  modal,
-  // addWatchBtn,
-} from './refs';
+import { galleryRef, containerElem, closeModalBtn, modal } from './refs';
 import { fetchMovie, fetchTrailerFilm } from './fetch';
 import renderModal from './renderModal';
 
@@ -17,14 +11,14 @@ let searchId;
 closeModalBtn.addEventListener('click', closeModal);
 
 function openModal() {
-  modal.classList.remove('is-hidden');
+  modal.classList.remove('is-hidden-modal');
   document.body.classList.add('stop-scroll');
   window.addEventListener('click', handleClickOnBackdrop);
   window.addEventListener('keydown', handleKeyPress);
 
   const addWatchBtn = document.querySelector('.film__button-add-to-watch');
   const addQueueBtn = document.querySelector('.film__button-add-to-queue');
-  const trailerBtn = document.querySelector('.film__trailer');
+  const trailerBtn = document.querySelector('.film__button-trailer');
 
   const isAddToWatch = isAdded(LOCAL_STORAGE_WATCH_KEY, searchId);
   const isAddToQueue = isAdded(LOCAL_STORAGE_QUEUE_KEY, searchId);
@@ -34,24 +28,21 @@ function openModal() {
   if (isAddToWatch) {
     renderBtnAppearance(addWatchBtn, WATCH_LIST_TYPE, true);
     addWatchBtn.addEventListener('click', handleRemoveWatch);
-  }
-
-  if (!isAddToWatch) {
+  } else {
     renderBtnAppearance(addWatchBtn, WATCH_LIST_TYPE, false);
     addWatchBtn.addEventListener('click', handleWatchClick);
   }
   if (isAddToQueue) {
     renderBtnAppearance(addQueueBtn, QUEUE_LIST_TYPE, true);
     addQueueBtn.addEventListener('click', handleRemoveQueue);
-  }
-  if (!isAddToQueue) {
+  } else {
     renderBtnAppearance(addQueueBtn, QUEUE_LIST_TYPE, false);
     addQueueBtn.addEventListener('click', handleQueueClick);
   }
 }
 
 function closeModal() {
-  modal.classList.add('is-hidden');
+  modal.classList.add('is-hidden-modal');
   document.body.classList.remove('stop-scroll');
   window.removeEventListener('click', handleClickOnBackdrop);
   window.removeEventListener('keydown', handleKeyPress);
@@ -80,10 +71,6 @@ function handleClickOnBackdrop(e) {
 galleryRef.addEventListener('click', handleFilmClick);
 
 async function handleFilmClick(e) {
-  // console.log(e);
-  // console.log(e.target.nodeName);
-  // console.log(e.target.closest('li').dataset.id);
-
   if (!e.target.closest('li')) {
     return;
   }
@@ -94,11 +81,6 @@ async function handleFilmClick(e) {
     openModal();
   }
 }
-
-//  if (e.target.nodeName === 'IMG' || e.target.nodeName === 'SPAN') {
-//    console.log('не равно');
-//    return;
-//  }
 
 function handleWatchClick(e) {
   updateLocalStorageList(e, LOCAL_STORAGE_WATCH_KEY, WATCH_LIST_TYPE);
@@ -129,9 +111,6 @@ function updateLocalStorageList(event, key, listType) {
   const loadAddedList = localStorage.getItem(key);
   const parsedIdList = JSON.parse(loadAddedList);
   const renderBtn = event.target;
-  // const findeFilmId = responseParsed
-  //   ? responseParsed.find(value => value === id)
-  //   : false;
 
   if (!loadAddedList) {
     const watchSetting = [id];
@@ -179,6 +158,7 @@ function handleBtnTrailerClick(e) {
   const id = searchId;
   fetchTrailerFilm(id).then(({ results }) => {
     let key = results[0].key;
-    placeContainerElem.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    placeContainerElem.innerHTML = `<iframe class ="film__trailer" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   });
+  e.target.setAttribute('disabled', true);
 }
