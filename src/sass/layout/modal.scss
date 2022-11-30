@@ -26,7 +26,7 @@ body.stop-scroll {
   }
 }
 
-.backdrop.is-hidden {
+.backdrop.is-hidden-modal {
   opacity: 0;
   transform: scale(3);
   pointer-events: none;
@@ -34,16 +34,14 @@ body.stop-scroll {
 
 .modal {
   position: absolute;
-  top: 70%;
+  top: 25px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   z-index: 10;
 
   width: 280px;
-  min-height: 500px;
+  min-height: 650px;
   height: auto;
-
-  margin-top: 30px;
 
   padding: 0 20px;
   padding-bottom: 35px;
@@ -51,7 +49,7 @@ body.stop-scroll {
   border-radius: 4px;
 
   @media screen and (min-width: $breakpoint-tablet) {
-    top: 50%;
+    top: 95px;
     margin: 0 auto;
     width: 704px;
     min-height: 420px;
@@ -63,6 +61,7 @@ body.stop-scroll {
   }
 
   @media screen and (min-width: $breakpoint-decktop) {
+    top: 125px;
     margin: 0 auto;
     width: 806px;
     height: auto;
@@ -91,7 +90,6 @@ body.stop-scroll {
 
   &:hover,
   &:focus {
-    // fill: $btn-accent-color;
     background-color: $btn-accent-color;
     border-radius: 50%;
   }
@@ -264,11 +262,11 @@ body.stop-scroll {
 
   @media screen and (min-width: $breakpoint-tablet) {
     width: 123px;
-    line-height: 1.23;
+    line-height: 1.09;
   }
   @media screen and (min-width: $breakpoint-decktop) {
     width: 136px;
-    line-height: 1.13;
+    line-height: 1.09;
     padding: 0 10px;
   }
 
