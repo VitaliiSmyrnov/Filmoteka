@@ -17,13 +17,6 @@
     right: 10px;
   }
 
-  // @media screen and (min-width: $breakpoint-decktop) {
-  //   width: 50px;
-  //   height: 50px;
-  //   bottom: 50px;
-  //   right: 50px;
-  // }
-
   &:hover {
     -webkit-box-shadow: 0px 0px 5px 4px orange;
     -moz-box-shadow: 0px 0px 5px 4px orange;
@@ -48,10 +41,6 @@
       width: 20px;
       height: 20px;
     }
-    // @media screen and (min-width: $breakpoint-decktop) {
-    //   width: 25px;
-    //   height: 25px;
-    // }
 
   }
 

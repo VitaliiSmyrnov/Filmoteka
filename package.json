@@ -2,17 +2,17 @@
   "name": "filmoteka",
   "version": "2.0.0",
   "description": "This project was created with Parcel. For familiarization and setting additional features [refer to documentation](https://parceljs.org/).",
-  "homepage": "https://Katya-Kondratchuk.github.io/filmoteka",
+  "homepage": "https://VitaliiSmyrnov.github.io/Filmoteka",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/*.html --public-url /filmoteka/"
+    "build": "parcel build src/*.html --public-url /Filmoteka/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
   "keywords": [],
-  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
+  "author": "Vitalii Smyrnov <vitaliy.smirnov@ukr.net>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
